@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tesis.models">
+    <class name="Producto" table="Producto">
+        <id name="idProducto"  column="idProducto" unsaved-value="0" type="integer">
+            <generator class="native" ></generator>
+        </id>
+        <property name="codigoBarra" column="codigoBarra" type="integer" length="50" />
+        <property name="fabricante" column="fabricante" type="string" length="50" />
+        <set name="items" table="producto_item" fetch="join" lazy="true"  >
+            <key column="Producto_idProducto"/>
+            <many-to-many column="Item_idItem" class="Item"/>
+        </set>
+        <set name="comentarios" table="comentario" fetch="join" lazy="true"  >
+            <key column="idComentario"/>
+            <one-to-many class="Comentario"/>
+        </set>
+    </class>
+</hibernate-mapping>
