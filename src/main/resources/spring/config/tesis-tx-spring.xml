@@ -13,9 +13,9 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://db4free.net:3306/tesis" />
-        <property name="username" value="rootnahuel" />
-        <property name="password" value="rootnahuel" />
+        <property name="url" value="jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10224624" />
+        <property name="username" value="sql10224624" />
+        <property name="password" value="6jhuz5QDwJ" />
     </bean>
 
     <!-- Hibernate session factory -->

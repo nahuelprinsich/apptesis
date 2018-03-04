@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.tesis.models">
-    <class name="Item" table="Item">
+    <class name="Item" table="item">
         <id name="idItem"  column="idItem" unsaved-value="0" type="long">
             <generator class="native" ></generator>
         </id>
