@@ -9,4 +9,5 @@ public interface ProductoDAO extends GenericDAO<Producto> {
 
     public Producto getProductoById(Integer id);
 
+    public Producto getProductoByCodigo(String codigo);
 }

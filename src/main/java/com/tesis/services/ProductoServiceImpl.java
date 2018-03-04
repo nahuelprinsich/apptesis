@@ -21,6 +21,11 @@ public class ProductoServiceImpl implements ProductoService{
 
     }
 
+    @RequestMapping("/getProductoByCodigo")
+    public Producto getProductoByCodigo(String codigo) {
+        return productoBO.getProductoByCodigo(codigo);
+    }
+
     public ProductoBO getProductoBO() {
         return productoBO;
     }

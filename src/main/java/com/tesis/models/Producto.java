@@ -10,7 +10,7 @@ import java.util.Set;
 public class Producto implements Serializable {
 
     private Integer idProducto;
-    private Integer codigoBarra;
+    private String codigoBarra;
     private String fabricante;
     private Set<Item> items;
     private Set<Comentario> comentarios;
@@ -23,11 +23,11 @@ public class Producto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public Integer getCodigoBarra() {
+    public String getCodigoBarra() {
         return codigoBarra;
     }
 
-    public void setCodigoBarra(Integer codigoBarra) {
+    public void setCodigoBarra(String codigoBarra) {
         this.codigoBarra = codigoBarra;
     }
 

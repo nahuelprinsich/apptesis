@@ -7,7 +7,7 @@
         <id name="idProducto"  column="idProducto" unsaved-value="0" type="integer">
             <generator class="native" ></generator>
         </id>
-        <property name="codigoBarra" column="codigoBarra" type="integer" length="50" />
+        <property name="codigoBarra" column="codigoBarra" type="string" length="50" />
         <property name="fabricante" column="fabricante" type="string" length="50" />
         <set name="items" table="producto_item" fetch="join" lazy="true"  >
             <key column="Producto_idProducto"/>

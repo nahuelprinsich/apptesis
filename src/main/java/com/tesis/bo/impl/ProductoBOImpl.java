@@ -20,4 +20,10 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
     public Producto getProductoById(Integer id) {
         return productoDAO.getProductoById(id);
     }
+
+    public Producto getProductoByCodigo(String codigo) {
+        return productoDAO.getProductoByCodigo(codigo);
+    }
+
+
 }

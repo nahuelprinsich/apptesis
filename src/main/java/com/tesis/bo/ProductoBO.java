@@ -8,4 +8,6 @@ import com.tesis.models.Producto;
 public interface ProductoBO extends GenericBO<Producto> {
 
     public Producto getProductoById(Integer id);
+
+    public Producto getProductoByCodigo(String codigo);
 }

@@ -9,4 +9,5 @@ public interface ProductoService {
 
     public Producto getProductoById(Integer id);
 
+    public Producto getProductoByCodigo(String codigo);
 }

@@ -19,7 +19,7 @@ public class ProductoAction extends ActionSupport {
     private ProductoBO productoBO;
     @Autowired
     private ItemBO itemBO;
-    private Integer codigo;
+    private String codigo;
     private String fabricante;
     private String nombre;
     private List<Producto> listaProductos;
@@ -64,11 +64,11 @@ public class ProductoAction extends ActionSupport {
         this.productoBO = productoBO;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

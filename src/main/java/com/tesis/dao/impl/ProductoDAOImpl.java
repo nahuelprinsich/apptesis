@@ -20,4 +20,16 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         this.getSessionFactory().getCurrentSession().close();
         return producto;
     }
+
+    public Producto getProductoByCodigo(String codigo) {
+        Producto producto = new Producto();
+        this.getSessionFactory().getCurrentSession().beginTransaction();
+        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
+        criteria.add(Restrictions.eq("codigoBarra", codigo));
+        producto = (Producto) criteria.uniqueResult();
+        this.getSessionFactory().getCurrentSession().close();
+        return producto;
+    }
+
+
 }
