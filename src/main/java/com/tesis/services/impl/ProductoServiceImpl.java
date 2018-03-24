@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by Nahuel on 9/12/2017.
  */
 
-@RestController
+@RestController("ProductoServiceController")
 public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
