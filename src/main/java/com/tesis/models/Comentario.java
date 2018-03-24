@@ -9,6 +9,11 @@ public class Comentario implements Serializable {
 
     private long idComentario;
     private String descripcion;
+    private Integer puntaje;
+
+    public Comentario(){
+
+    }
 
     public long getIdComentario() {
         return idComentario;
@@ -26,4 +31,11 @@ public class Comentario implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Integer getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Integer puntaje) {
+        this.puntaje = puntaje;
+    }
 }

@@ -27,4 +27,34 @@
         <property name="genericDAO" ref="producto.hibernate.dao" />
     </bean>
 
+    <bean id="envase.bo" class="com.tesis.bo.impl.EnvaseBOImpl">
+        <property name="envaseDAO" ref="envase.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="extra.bo" class="com.tesis.bo.impl.ExtraBOImpl">
+        <property name="extraDAO" ref="extra.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="fabricante.bo" class="com.tesis.bo.impl.FabricanteBOImpl">
+        <property name="fabricanteDAO" ref="fabricante.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="ingrediente.bo" class="com.tesis.bo.impl.IngredienteBOImpl">
+        <property name="ingredienteDAO" ref="ingrediente.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="valorEnergetico.bo" class="com.tesis.bo.impl.ValorEnergeticoBOImpl">
+        <property name="valorEnergeticoDAO" ref="valorEnergetico.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="valorEnergeticoProducto.bo" class="com.tesis.bo.impl.ValorEnergeticoProductoBOImpl">
+        <property name="valorEnergeticoProductoDAO" ref="valorEnergeticoProducto.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
 </beans>

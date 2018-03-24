@@ -7,15 +7,35 @@
         <id name="idProducto"  column="idProducto" unsaved-value="0" type="integer">
             <generator class="native" ></generator>
         </id>
-        <property name="codigoBarra" column="codigoBarra" type="string" length="50" />
-        <property name="fabricante" column="fabricante" type="string" length="50" />
-        <set name="items" table="producto_item" fetch="join" lazy="true"  >
-            <key column="Producto_idProducto"/>
-            <many-to-many column="Item_idItem" class="Item"/>
-        </set>
-        <set name="comentarios" table="comentario" fetch="join" lazy="true"  >
+        <property name="codigoBarra" column="codigoBarra" />
+        <property name="nombreProducto" column="nombreProducto" />
+        <property name="rubro" column="rubro" />
+        <property name="esAlimento" column="esAlimento" />
+        <property name="porcion" column="porcion" />
+        <property name="tipoPorcion" column="tipoPorcion" />
+        <property name="imagen" column="imagen" />
+        <one-to-one name="envase" class="Envase" />
+        <one-to-one name="fabricante" class="Fabricante" />
+        <set name="comentarios" table="comentario" fetch="join" lazy="false"  >
             <key column="idComentario"/>
             <one-to-many class="Comentario"/>
         </set>
+        <set name="extras" table="extra" fetch="join" lazy="false"  >
+            <key column="idExtra"/>
+            <one-to-many class="Extra"/>
+        </set>
+        <set name="ingredientes" table="producto_ingrediente" fetch="join" lazy="false">
+            <key column="Producto_idProducto"/>
+            <many-to-many column="Ingrediente_idIngrediente" class="Ingrediente"/>
+        </set>
+        <set name="valoresEnergeticos" table="producto_valorenergetico" fetch="join" lazy="false">
+            <key column="Producto_idProducto"/>
+            <many-to-many column="ValorEnergetico_idValorEnergetico" class="ValorEnergetico"/>
+        </set>
+        <!--<set name="valorEnergeticoProductos" table="valorenergetico_producto" fetch="join" lazy="false"  >
+            <key column="Producto_idProducto"/>
+            <one-to-many class="ValorEnergeticoProducto" />
+        </set>-->
+
     </class>
 </hibernate-mapping>

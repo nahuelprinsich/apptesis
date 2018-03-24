@@ -33,7 +33,7 @@ public class ProductoAction extends ActionSupport {
 
     public String cargarProducto(){
         Producto producto = new Producto();
-        producto.setFabricante(this.getFabricante());
+        //producto.setFabricante(this.getFabricante());
         producto.setCodigoBarra(this.getCodigo());
         productoBO.add(producto);
         return "success";

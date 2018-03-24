@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tesis.models">
+    <class name="Envase" table="envase">
+        <id name="idEnvase"  column="idEnvase" unsaved-value="0" type="integer">
+            <generator class="native" ></generator>
+        </id>
+        <property name="tipo" column="tipo" />
+        <property name="descripcion" column="descripcion" />
+        <property name="ftalatos" column="ftalatos" />
+        <property name="retornable" column="retornable" />
+        <property name="reutilizable" column="reutilizable" />
+        <property name="marcado" column="marcado" />
+        <property name="reciclable" column="reciclable" />
+        <property name="aptoConsumo" column="aptoConsumo" />
+    </class>
+</hibernate-mapping>

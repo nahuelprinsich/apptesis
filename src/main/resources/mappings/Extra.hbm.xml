@@ -3,11 +3,10 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.tesis.models">
-    <class name="Comentario" table="comentario">
-        <id name="idComentario"  column="idComentario" unsaved-value="0" type="integer">
+    <class name="Extra" table="extra">
+        <id name="idExtra"  column="idExtra" unsaved-value="0" type="integer">
             <generator class="native" ></generator>
         </id>
         <property name="descripcion" column="descripcion" type="string" length="50" />
-        <property name="puntaje" column="puntaje" />
     </class>
 </hibernate-mapping>

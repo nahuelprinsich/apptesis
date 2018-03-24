@@ -23,4 +23,28 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
+    <bean id="envase.hibernate.dao" class="com.tesis.dao.impl.EnvaseDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="extra.hibernate.dao" class="com.tesis.dao.impl.ExtraDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="fabricante.hibernate.dao" class="com.tesis.dao.impl.FabricanteDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="ingrediente.hibernate.dao" class="com.tesis.dao.impl.IngredienteDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="valorEnergetico.hibernate.dao" class="com.tesis.dao.impl.ValorEnergeticoDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="valorEnergeticoProducto.hibernate.dao" class="com.tesis.dao.impl.ValorEnergeticoProductoDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
 </beans>

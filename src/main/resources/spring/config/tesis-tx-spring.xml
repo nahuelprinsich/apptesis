@@ -13,9 +13,11 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10227077" />
-        <property name="username" value="sql10227077" />
-        <property name="password" value="lrEI1NnQZL" />
+        <!--<property name="url" value="jdbc:mysql://localhost:8080/tesis" />
+        <property name="username" value="root" />-->
+        <property name="url" value="jdbc:mysql://nahuelp.heliohost.org:8080/nahuelp_tesis" />
+        <property name="username" value="nahuelp_root" />
+        <property name="password" value="rootnahuel" />
     </bean>
 
     <!-- Hibernate session factory -->
@@ -41,8 +43,13 @@
         <property name="mappingResources">
             <list>
                 <value>mappings/Comentario.hbm.xml</value>
-                <value>mappings/Item.hbm.xml</value>
                 <value>mappings/Producto.hbm.xml</value>
+                <value>mappings/Envase.hbm.xml</value>
+                <value>mappings/Extra.hbm.xml</value>
+                <value>mappings/Fabricante.hbm.xml</value>
+                <value>mappings/Ingrediente.hbm.xml</value>
+                <value>mappings/ValorEnergetico.hbm.xml</value>
+                <value>mappings/ValorEnergeticoProducto.hbm.xml</value>
             </list>
         </property>
     </bean>
