@@ -1,8 +1,10 @@
 package com.tesis.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.tesis.bo.IngredienteBO;
 import com.tesis.bo.ItemBO;
 import com.tesis.bo.ProductoBO;
+import com.tesis.models.Ingrediente;
 import com.tesis.models.Item;
 import com.tesis.models.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,8 @@ public class ProductoAction extends ActionSupport {
     @Autowired
     private ProductoBO productoBO;
     @Autowired
-    private ItemBO itemBO;
+    private IngredienteBO ingredienteBO;
+    private Ingrediente ingrediente;
     private String codigo;
     private String fabricante;
     private String nombre;
@@ -39,16 +42,14 @@ public class ProductoAction extends ActionSupport {
         return "success";
     }
 
-    public String cargarItem(){
-        Item item = new Item();
-        item.setNombre(this.getNombre());
-        itemBO.add(item);
+    public String cargarIngrediente(){
+        ingredienteBO.add(ingrediente);
         return "success";
     }
 
     public String cargarAsociaciones(){
         listaProductos = productoBO.getAll(Producto.class);
-        listaItems = itemBO.getAll(Item.class);
+        //listaItems = itemBO.getAll(Item.class);
         return "success";
     }
 
@@ -88,14 +89,6 @@ public class ProductoAction extends ActionSupport {
         this.nombre = nombre;
     }
 
-    public ItemBO getItemBO() {
-        return itemBO;
-    }
-
-    public void setItemBO(ItemBO itemBO) {
-        this.itemBO = itemBO;
-    }
-
     public List<Producto> getListaProductos() {
         return listaProductos;
     }
@@ -126,5 +119,21 @@ public class ProductoAction extends ActionSupport {
 
     public void setItemSeleccionado(String itemSeleccionado) {
         this.itemSeleccionado = itemSeleccionado;
+    }
+
+    public IngredienteBO getIngredienteBO() {
+        return ingredienteBO;
+    }
+
+    public void setIngredienteBO(IngredienteBO ingredienteBO) {
+        this.ingredienteBO = ingredienteBO;
+    }
+
+    public Ingrediente getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
     }
 }

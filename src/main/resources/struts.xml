@@ -10,7 +10,7 @@
          <result name="success">/index.jsp</result>
       </action>
 
-      <action name="CargarItem" method="cargarItem"
+      <action name="CargarIngrediente" method="cargarIngrediente"
               class="com.tesis.actions.ProductoAction">
          <result name="success">/index.jsp</result>
       </action>

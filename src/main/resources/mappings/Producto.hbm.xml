@@ -14,6 +14,8 @@
         <property name="porcion" column="porcion" />
         <property name="tipoPorcion" column="tipoPorcion" />
         <property name="imagen" column="imagen" />
+        <property name="marca" column="marca" />
+        <property name="contenidoNeto" column="contenidoNeto" />
         <one-to-one name="envase" class="Envase" />
         <one-to-one name="fabricante" class="Fabricante" />
         <set name="comentarios" table="comentario" fetch="join" lazy="false"  >

@@ -32,9 +32,27 @@ public class Producto implements Serializable {
     //private Set<ValorEnergeticoProducto> valorEnergeticoProductos;
     @JsonManagedReference
     private Set<ValorEnergetico> valoresEnergeticos;
+    private String marca;
+    private String contenidoNeto;
 
     public Producto(){
 
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getContenidoNeto() {
+        return contenidoNeto;
+    }
+
+    public void setContenidoNeto(String contenidoNeto) {
+        this.contenidoNeto = contenidoNeto;
     }
 
     public Integer getIdProducto() {
