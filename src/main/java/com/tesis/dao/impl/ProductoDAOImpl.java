@@ -38,7 +38,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         List<Producto> lista;
         this.getSessionFactory().getCurrentSession().beginTransaction();
         Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
-        lista = criteria.list();
+        lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
         this.getSessionFactory().getCurrentSession().close();
         return lista;
     }
