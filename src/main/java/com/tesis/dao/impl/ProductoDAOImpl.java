@@ -6,6 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Nahuel on 6/12/2017.
  */
@@ -29,6 +32,15 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         producto = (Producto) criteria.uniqueResult();
         this.getSessionFactory().getCurrentSession().close();
         return producto;
+    }
+
+    public List<Producto> getAllProductos() {
+        List<Producto> lista;
+        this.getSessionFactory().getCurrentSession().beginTransaction();
+        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
+        lista = criteria.list();
+        this.getSessionFactory().getCurrentSession().close();
+        return lista;
     }
 
 

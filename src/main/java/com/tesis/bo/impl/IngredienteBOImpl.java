@@ -4,6 +4,8 @@ import com.tesis.bo.IngredienteBO;
 import com.tesis.dao.IngredienteDAO;
 import com.tesis.models.Ingrediente;
 
+import java.util.List;
+
 /**
  * Created by Nahuel on 11/3/2018.
  */
@@ -17,5 +19,9 @@ public class IngredienteBOImpl extends GenericBOImpl<Ingrediente> implements Ing
 
     public void setIngredienteDAO(IngredienteDAO ingredienteDAO) {
         this.ingredienteDAO = ingredienteDAO;
+    }
+
+    public List<Ingrediente> getAllIngredientes() {
+        return ingredienteDAO.getAllIngredientes();
     }
 }

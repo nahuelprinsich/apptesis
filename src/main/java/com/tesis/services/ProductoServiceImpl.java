@@ -6,6 +6,8 @@ import com.tesis.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
@@ -27,6 +29,11 @@ public class ProductoServiceImpl implements ProductoService {
     @RequestMapping(value = "/getProductoByCodigo", method = GET)
     public Producto getProductoByCodigo(String codigo) {
         return productoBO.getProductoByCodigo(codigo);
+    }
+
+    @RequestMapping(value = "/getAllProductos", method = GET)
+    public List<Producto> getAllProductos(){
+        return productoBO.getAllProductos();
     }
 
     public ProductoBO getProductoBO() {

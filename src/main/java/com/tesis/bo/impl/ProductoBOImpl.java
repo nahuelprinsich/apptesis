@@ -4,6 +4,8 @@ import com.tesis.bo.ProductoBO;
 import com.tesis.dao.ProductoDAO;
 import com.tesis.models.Producto;
 
+import java.util.List;
+
 /**
  * Created by Nahuel on 6/12/2017.
  */
@@ -23,6 +25,10 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
 
     public Producto getProductoByCodigo(String codigo) {
         return productoDAO.getProductoByCodigo(codigo);
+    }
+
+    public List<Producto> getAllProductos() {
+        return productoDAO.getAllProductos();
     }
 
 
