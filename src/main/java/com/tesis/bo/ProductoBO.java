@@ -13,5 +13,9 @@ public interface ProductoBO extends GenericBO<Producto> {
 
     public Producto getProductoByCodigo(String codigo);
 
-    List<Producto> getAllProductos();
+    public List<Producto> getAllProductos();
+
+    public List<Producto> getByRubro(String rubro);
+
+    public List<Producto> getAllByIngrediente(List<String> ingredientes);
 }

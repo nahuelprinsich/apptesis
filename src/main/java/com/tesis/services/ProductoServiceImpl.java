@@ -36,6 +36,16 @@ public class ProductoServiceImpl implements ProductoService {
         return productoBO.getAllProductos();
     }
 
+    @RequestMapping(value = "/getByRubro", method = GET)
+    public List<Producto> getByRubro(@RequestParam(value="rubro") String rubro) {
+        return productoBO.getByRubro(rubro);
+    }
+
+    @RequestMapping(value = "/getAllByIngrediente", method = GET)
+    public List<Producto> getAllByIngrediente(@RequestParam(value="ingrediente") List<String> ingredientes){
+        return productoBO.getAllByIngrediente(ingredientes);
+    }
+
     public ProductoBO getProductoBO() {
         return productoBO;
     }

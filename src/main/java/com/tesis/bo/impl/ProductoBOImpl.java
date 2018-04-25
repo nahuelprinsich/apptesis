@@ -31,5 +31,13 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
         return productoDAO.getAllProductos();
     }
 
+    public List<Producto> getByRubro(String rubro){
+        return productoDAO.getByRubro(rubro);
+    }
+
+    public List<Producto> getAllByIngrediente(List<String> ingredientes) {
+        return productoDAO.getAllByIngrediente(ingredientes);
+    }
+
 
 }

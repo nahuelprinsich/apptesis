@@ -4,13 +4,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.tesis.bo.IngredienteBO;
 import com.tesis.bo.ItemBO;
 import com.tesis.bo.ProductoBO;
-import com.tesis.models.Ingrediente;
-import com.tesis.models.Item;
-import com.tesis.models.Producto;
+import com.tesis.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Nahuel on 6/12/2017.
@@ -22,34 +22,34 @@ public class ProductoAction extends ActionSupport {
     @Autowired
     private IngredienteBO ingredienteBO;
     private Ingrediente ingrediente;
-    private String codigo;
-    private String fabricante;
-    private String nombre;
-    private List<Producto> listaProductos;
-    private List<Item> listaItems;
-    private String productoSeleccionado;
-    private String itemSeleccionado;
+    private Envase envase;
+    private Extra extra;
+    private ValorEnergetico valorEnergetico;
+    private Producto producto;
+    private Fabricante fabricante;
 
     public String execute(){
         return "success";
     }
 
     public String cargarProducto(){
-        Producto producto = new Producto();
-        //producto.setFabricante(this.getFabricante());
-        producto.setCodigoBarra(this.getCodigo());
+        this.producto.setIngredientes(new HashSet<Ingrediente>());
+        this.producto.setExtras(new HashSet<Extra>());
+        this.producto.setValoresEnergeticos(new HashSet<ValorEnergetico>());
+        envase.setIdEnvase(20);
+        fabricante.setIdFabricante(20);
+        this.producto.setEnvase(envase);
+        this.producto.getExtras().add(extra);
+        this.producto.setFabricante(fabricante);
+        this.producto.getIngredientes().add(ingrediente);
+        this.producto.getValoresEnergeticos().add(valorEnergetico);
+
         productoBO.add(producto);
         return "success";
     }
 
     public String cargarIngrediente(){
         ingredienteBO.add(ingrediente);
-        return "success";
-    }
-
-    public String cargarAsociaciones(){
-        listaProductos = productoBO.getAll(Producto.class);
-        //listaItems = itemBO.getAll(Item.class);
         return "success";
     }
 
@@ -63,62 +63,6 @@ public class ProductoAction extends ActionSupport {
 
     public void setProductoBO(ProductoBO productoBO) {
         this.productoBO = productoBO;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getFabricante() {
-        return fabricante;
-    }
-
-    public void setFabricante(String fabricante) {
-        this.fabricante = fabricante;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public List<Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-
-    public List<Item> getListaItems() {
-        return listaItems;
-    }
-
-    public void setListaItems(List<Item> listaItems) {
-        this.listaItems = listaItems;
-    }
-
-    public String getProductoSeleccionado() {
-        return productoSeleccionado;
-    }
-
-    public void setProductoSeleccionado(String productoSeleccionado) {
-        this.productoSeleccionado = productoSeleccionado;
-    }
-
-    public String getItemSeleccionado() {
-        return itemSeleccionado;
-    }
-
-    public void setItemSeleccionado(String itemSeleccionado) {
-        this.itemSeleccionado = itemSeleccionado;
     }
 
     public IngredienteBO getIngredienteBO() {
@@ -135,5 +79,45 @@ public class ProductoAction extends ActionSupport {
 
     public void setIngrediente(Ingrediente ingrediente) {
         this.ingrediente = ingrediente;
+    }
+
+    public Envase getEnvase() {
+        return envase;
+    }
+
+    public void setEnvase(Envase envase) {
+        this.envase = envase;
+    }
+
+    public Extra getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Extra extra) {
+        this.extra = extra;
+    }
+
+    public ValorEnergetico getValorEnergetico() {
+        return valorEnergetico;
+    }
+
+    public void setValorEnergetico(ValorEnergetico valorEnergetico) {
+        this.valorEnergetico = valorEnergetico;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Fabricante getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
     }
 }

@@ -14,7 +14,6 @@
     <bean id="producto.action"
           class="com.tesis.actions.ProductoAction" scope="prototype">
         <property name="productoBO" ref="producto.bo" />
-        <property name="itemBO" ref="item.bo" />
     </bean>
 
 </beans>

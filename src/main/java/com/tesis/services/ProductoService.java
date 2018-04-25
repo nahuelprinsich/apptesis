@@ -14,4 +14,8 @@ public interface ProductoService {
     public Producto getProductoByCodigo(String codigo);
 
     public List<Producto> getAllProductos();
+
+    public List<Producto> getByRubro(String rubro);
+
+    public List<Producto> getAllByIngrediente(List<String> ingredientes);
 }

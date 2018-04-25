@@ -15,10 +15,10 @@
             <form class="form-signin">
                 <h2 class="form-signin-heading">Administracion</h2>
                 <div class="form-group">
-                    <a href="pages/cargarProducto.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Productos</button></a>
+                    <a href="cargarProducto.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Productos</button></a>
                 </div>
                 <div class="form-group">
-                    <a href="pages/cargarIngrediente.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Ingredientes</button></a>
+                    <a href="cargarIngrediente.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Ingredientes</button></a>
                 </div>
             </form>
         </div>
