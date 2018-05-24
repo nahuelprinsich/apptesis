@@ -10,4 +10,6 @@ import java.util.List;
 public interface IngredienteBO extends GenericBO<Ingrediente> {
 
     public List<Ingrediente> getAllIngredientes();
+
+    public Ingrediente addIngrediente(Ingrediente ingrediente);
 }

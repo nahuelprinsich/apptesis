@@ -19,4 +19,12 @@ public class IngredienteDAOImpl extends GenericDAOImpl<Ingrediente> implements I
         this.getSessionFactory().getCurrentSession().close();
         return lista;
     }
+
+    public Ingrediente addIngrediente(Ingrediente ingrediente) {
+        this.getSessionFactory().getCurrentSession().beginTransaction();
+        this.getSessionFactory().getCurrentSession().save(ingrediente);
+        this.getSessionFactory().getCurrentSession().getTransaction().commit();
+        this.getSessionFactory().getCurrentSession().close();
+        return ingrediente;
+    }
 }

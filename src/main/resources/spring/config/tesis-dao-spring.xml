@@ -43,8 +43,4 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <bean id="valorEnergeticoProducto.hibernate.dao" class="com.tesis.dao.impl.ValorEnergeticoProductoDAOImpl" >
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-
 </beans>

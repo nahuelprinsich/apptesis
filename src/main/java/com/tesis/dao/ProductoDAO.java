@@ -18,4 +18,6 @@ public interface ProductoDAO extends GenericDAO<Producto> {
     public List<Producto> getByRubro(String rubro);
 
     public List<Producto> getAllByIngrediente(List<String> ingredientes);
+
+    public Producto addProducto(Producto producto);
 }

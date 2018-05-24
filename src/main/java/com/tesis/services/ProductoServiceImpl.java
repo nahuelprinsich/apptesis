@@ -46,6 +46,10 @@ public class ProductoServiceImpl implements ProductoService {
         return productoBO.getAllByIngrediente(ingredientes);
     }
 
+    public Producto addProducto(Producto producto) {
+        return productoBO.addProducto(producto);
+    }
+
     public ProductoBO getProductoBO() {
         return productoBO;
     }

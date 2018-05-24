@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.tesis.models">
     <class name="Fabricante" table="fabricante">
-        <id name="idFabricante"  column="idFabricante" unsaved-value="0" type="integer">
+        <id name="idFabricante" type="integer" column="idFabricante" unsaved-value="0">
             <generator class="native" ></generator>
         </id>
         <property name="domicilio" column="domicilio" />

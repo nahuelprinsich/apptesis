@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.tesis.models">
     <class name="Envase" table="envase">
-        <id name="idEnvase"  column="idEnvase" unsaved-value="0" type="integer">
+        <id name="idEnvase" type="integer" column="idEnvase" unsaved-value="0">
             <generator class="native" ></generator>
         </id>
         <property name="tipo" column="tipo" />

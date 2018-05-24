@@ -78,6 +78,31 @@
       <version>4.3.12.RELEASE</version>
     </dependency>
 
+    <!-- Dependencias Spring Security  -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>3.2.2.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>3.2.2.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
     <!-- Spring AOP dependency -->
     <dependency>
       <groupId>cglib</groupId>
@@ -148,13 +173,6 @@
           <artifactId>javassist</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-
-    <!-- Dependencias Tiles -->
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-extras</artifactId>
-      <version>3.0.7</version>
     </dependency>
 
     <!-- Dependencias Web -->

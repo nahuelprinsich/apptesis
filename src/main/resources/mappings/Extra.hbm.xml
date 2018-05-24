@@ -8,5 +8,8 @@
             <generator class="native" ></generator>
         </id>
         <property name="descripcion" column="descripcion" type="string" length="50" />
+        <many-to-one name="producto" class="Producto" fetch="select">
+            <column name="Producto_idProducto" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

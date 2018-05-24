@@ -24,6 +24,10 @@ public class IngredienteServiceImpl implements IngredienteService {
         return ingredienteBO.getAllIngredientes();
     }
 
+    public Ingrediente addIngrediente(Ingrediente ingrediente) {
+        return ingredienteBO.addIngrediente(ingrediente);
+    }
+
     public IngredienteBO getIngredienteBO() {
         return ingredienteBO;
     }

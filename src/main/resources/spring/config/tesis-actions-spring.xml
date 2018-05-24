@@ -13,7 +13,16 @@
 
     <bean id="producto.action"
           class="com.tesis.actions.ProductoAction" scope="prototype">
-        <property name="productoBO" ref="producto.bo" />
+        <property name="envaseService" ref="envaseServiceImpl"/>
+        <property name="extraService" ref="extraServiceImpl" />
+        <property name="fabricanteService" ref="fabricanteServiceImpl" />
+        <property name="ingredienteService" ref="ingredienteServiceImpl" />
+        <property name="productoService" ref="productoServiceImpl" />
+        <property name="valorEnergeticoService" ref="valorEnergeticoServiceImpl" />
+    </bean>
+
+    <bean id="security.action"
+          class="com.tesis.actions.SecurityAction" scope="prototype">
     </bean>
 
 </beans>

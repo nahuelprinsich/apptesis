@@ -3,6 +3,7 @@ package com.tesis.bo.impl;
 import com.tesis.bo.ProductoBO;
 import com.tesis.dao.ProductoDAO;
 import com.tesis.models.Producto;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -39,5 +40,7 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
         return productoDAO.getAllByIngrediente(ingredientes);
     }
 
-
+    public Producto addProducto(Producto producto){
+        return productoDAO.addProducto(producto);
+    }
 }

@@ -56,4 +56,5 @@ public class Fabricante implements Serializable {
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
+
 }

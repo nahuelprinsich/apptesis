@@ -159,14 +159,6 @@ public class Producto implements Serializable {
         this.ingredientes = ingredientes;
     }
 
-    /*public Set<ValorEnergeticoProducto> getValorEnergeticoProductos() {
-        return valorEnergeticoProductos;
-    }
-
-    public void setValorEnergeticoProductos(Set<ValorEnergeticoProducto> valorEnergeticoProductos) {
-        this.valorEnergeticoProductos = valorEnergeticoProductos;
-    }*/
-
     public Set<ValorEnergetico> getValoresEnergeticos() {
         return valoresEnergeticos;
     }

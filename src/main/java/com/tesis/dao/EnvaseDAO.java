@@ -5,5 +5,7 @@ import com.tesis.models.Envase;
 /**
  * Created by Nahuel on 11/3/2018.
  */
-public interface EnvaseDAO extends GenericDAO<Envase> {
+public interface EnvaseDAO extends GenericDAO<Envase>{
+
+    public Envase addEnvase(Envase envase);
 }

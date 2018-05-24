@@ -15,7 +15,7 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-      classpath:spring/application-root-spring.xml
+      /WEB-INF/spring-security.xml, classpath:spring/application-root-spring.xml
     </param-value>
   </context-param>
 
@@ -60,6 +60,18 @@
       org.apache.struts2.tiles.StrutsTilesListener
     </listener-class>
   </listener>
+
+  <!-- filtro de Spring security -->
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>
+      org.springframework.web.filter.DelegatingFilterProxy
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <!-- filtro de Struts -->
   <filter>

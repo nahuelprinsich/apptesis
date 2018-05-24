@@ -9,6 +9,7 @@ public class Extra implements Serializable{
 
     private Integer idExtra;
     private String descripcion;
+    private Producto producto;
 
     public Extra(){
 
@@ -28,5 +29,13 @@ public class Extra implements Serializable{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 }

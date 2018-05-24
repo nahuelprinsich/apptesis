@@ -92,4 +92,5 @@ public class Envase implements Serializable {
     public void setAptoConsumo(Boolean aptoConsumo) {
         this.aptoConsumo = aptoConsumo;
     }
+
 }

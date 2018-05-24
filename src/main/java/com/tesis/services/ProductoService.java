@@ -18,4 +18,6 @@ public interface ProductoService {
     public List<Producto> getByRubro(String rubro);
 
     public List<Producto> getAllByIngrediente(List<String> ingredientes);
+
+    public Producto addProducto(Producto producto);
 }

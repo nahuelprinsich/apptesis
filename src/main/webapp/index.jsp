@@ -4,23 +4,34 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/css/estilos.css">
         <title>Index</title>
     </head>
     <body>
         <div class="container">
-            <form class="form-signin">
-                <h2 class="form-signin-heading">Administracion</h2>
-                <div class="form-group">
-                    <a href="cargarProducto.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Productos</button></a>
-                </div>
-                <div class="form-group">
-                    <a href="cargarIngrediente.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Cargar Ingredientes</button></a>
-                </div>
-            </form>
+            <div class="col-md-6 col-md-offset-3">
+                <s:form name="adminForm" action="#" method="post" class="form-signin">
+                    <fieldset><legend align="center">Administracion</legend>
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <a href="cargarProducto.jsp"><button class="btn btn-default inputLogin inputIndex" type="button">Cargar Producto</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <a href="modificarIngrediente.jsp"><button class="btn btn-default inputLogin inputIndex" type="button">Modificar Producto</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </s:form>
+            </div>
         </div>
     </body>
 </html>

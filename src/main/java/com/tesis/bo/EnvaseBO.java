@@ -6,4 +6,6 @@ import com.tesis.models.Envase;
  * Created by Nahuel on 11/3/2018.
  */
 public interface EnvaseBO extends GenericBO<Envase> {
+
+    public Envase addEnvase(Envase envase);
 }

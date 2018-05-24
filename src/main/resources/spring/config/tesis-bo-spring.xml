@@ -52,9 +52,4 @@
         <property name="genericDAO" ref="valorEnergetico.hibernate.dao" />
     </bean>
 
-    <bean id="valorEnergeticoProducto.bo" class="com.tesis.bo.impl.ValorEnergeticoProductoBOImpl">
-        <property name="valorEnergeticoProductoDAO" ref="valorEnergeticoProducto.hibernate.dao" />
-        <property name="genericDAO" ref="valorEnergeticoProducto.hibernate.dao" />
-    </bean>
-
 </beans>

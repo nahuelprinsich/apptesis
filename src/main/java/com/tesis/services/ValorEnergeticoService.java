@@ -1,11 +1,11 @@
-package com.tesis.dao;
+package com.tesis.services;
 
 import com.tesis.models.ValorEnergetico;
 
 /**
- * Created by Nahuel on 11/3/2018.
+ * Created by Nahuel on 6/5/2018.
  */
-public interface ValorEnergeticoDAO extends GenericDAO<ValorEnergetico> {
+public interface ValorEnergeticoService {
 
     public ValorEnergetico addValorEnergetico(ValorEnergetico valorEnergetico);
 }

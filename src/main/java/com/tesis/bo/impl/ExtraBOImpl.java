@@ -18,4 +18,8 @@ public class ExtraBOImpl extends GenericBOImpl<Extra> implements ExtraBO {
     public void setExtraDAO(ExtraDAO extraDAO) {
         this.extraDAO = extraDAO;
     }
+
+    public Extra addExtra(Extra extra) {
+        return extraDAO.addExtra(extra);
+    }
 }

@@ -10,18 +10,8 @@
          <result name="success">/index.jsp</result>
       </action>
 
-      <action name="CargarIngrediente" method="cargarIngrediente"
-              class="com.tesis.actions.ProductoAction">
-         <result name="success">/index.jsp</result>
-      </action>
-
-      <action name="CargarAsociaciones" method="cargarAsociaciones"
-              class="com.tesis.actions.ProductoAction">
-         <result name="success">pages/asociarProductosItems.jsp</result>
-      </action>
-
-      <action name="AsociarProductoItems" method="asociarProductoItems"
-              class="com.tesis.actions.ProductoAction">
+      <!-- Action para el logueo de usuario con spring security -->
+      <action name="security" class="security.action" method="execute">
          <result name="success">/index.jsp</result>
       </action>
 

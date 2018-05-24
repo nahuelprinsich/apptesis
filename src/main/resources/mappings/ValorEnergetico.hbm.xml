@@ -16,10 +16,6 @@
             <key column="ValorEnergetico_idValorEnergetico"/>
             <many-to-many column="Producto_idProducto" class="Producto" />
         </set>
-        <!--<set name="valorEnergeticoProductos" table="valorenergetico_producto" fetch="join" lazy="false"  >
-            <key column="ValorEnergetico_idValorEnergetico"/>
-            <one-to-many class="ValorEnergeticoProducto" />
-        </set>-->
 
     </class>
 </hibernate-mapping>

@@ -3,6 +3,7 @@ package com.tesis.bo.impl;
 import com.tesis.bo.IngredienteBO;
 import com.tesis.dao.IngredienteDAO;
 import com.tesis.models.Ingrediente;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -23,5 +24,9 @@ public class IngredienteBOImpl extends GenericBOImpl<Ingrediente> implements Ing
 
     public List<Ingrediente> getAllIngredientes() {
         return ingredienteDAO.getAllIngredientes();
+    }
+
+    public Ingrediente addIngrediente(Ingrediente ingrediente) {
+        return ingredienteDAO.addIngrediente(ingrediente);
     }
 }

@@ -26,3 +26,15 @@ body {
 .form-signin .form-control:focus {
     z-index: 2;
 }
+
+.inputLogin {
+    margin-bottom: 10px;
+}
+
+#botonLogin {
+    margin-left: 60px;
+}
+
+.inputIndex {
+    width: 142px;
+}

@@ -10,4 +10,6 @@ import java.util.List;
 public interface IngredienteDAO extends GenericDAO<Ingrediente> {
 
     List<Ingrediente> getAllIngredientes();
+
+    public Ingrediente addIngrediente(Ingrediente ingrediente);
 }

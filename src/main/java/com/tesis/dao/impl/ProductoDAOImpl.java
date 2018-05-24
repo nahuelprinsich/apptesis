@@ -68,5 +68,13 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         return lista;
     }
 
+    public Producto addProducto(Producto producto){
+        this.getSessionFactory().getCurrentSession().beginTransaction();
+        this.getSessionFactory().getCurrentSession().saveOrUpdate(producto);
+        this.getSessionFactory().getCurrentSession().getTransaction().commit();
+        this.getSessionFactory().getCurrentSession().close();
+        return producto;
+    }
+
 
 }

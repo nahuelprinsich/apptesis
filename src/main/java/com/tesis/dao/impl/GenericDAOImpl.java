@@ -5,6 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class GenericDAOImpl<T> implements GenericDAO<T> {
 
+    @Autowired
     private SessionFactory sessionFactory;
     protected Class<T> daoType;
 
@@ -41,7 +43,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(entity);
+             session.save(entity);
             tx.commit();
         }
         catch (RuntimeException e) {
