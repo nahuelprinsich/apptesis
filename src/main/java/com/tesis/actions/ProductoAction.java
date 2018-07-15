@@ -1,6 +1,7 @@
 package com.tesis.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.tesis.bo.ComentarioBO;
 import com.tesis.bo.IngredienteBO;
 import com.tesis.bo.ItemBO;
 import com.tesis.bo.ProductoBO;
@@ -30,6 +31,8 @@ public class ProductoAction extends ActionSupport {
     private ProductoService productoService;
     @Autowired
     private ValorEnergeticoService valorEnergeticoService;
+    @Autowired
+    private ProductoValorEnergeticoService productoValorEnergeticoService;
 
     /* Colecciones */
     private String ingredientes;
@@ -61,26 +64,59 @@ public class ProductoAction extends ActionSupport {
     private String localidadFabricante;
     private String paisFabricante;
 
+    /* Busqueda de ingrediente */
+    private String nombreIngrediente;
+    private List<Ingrediente> listaBusqueda;
+
 
     public String execute(){
         return "success";
     }
 
+    public String buscarIngrediente(){
+        listaBusqueda = ingredienteService.getIngredienteByName(nombreIngrediente);
+        return SUCCESS;
+    }
+
     public String cargarProducto(){
+        Ingrediente ingrediente = new Ingrediente();
+        HashSet<Ingrediente> hashSetIngredientes = new HashSet<Ingrediente>();
+        hashSetIngredientes.add(ingredienteService.addIngrediente(ingrediente));
+        ValorEnergetico valorEnergetico = new ValorEnergetico();
+        Fabricante fabricante = new Fabricante();
+        Extra extra = new Extra();
+        HashSet<Extra> hashSetExtra = new HashSet<Extra>();
+        hashSetExtra.add(extraService.addExtra(extra));
+        /*Comentario comentario = new Comentario();
+        HashSet<Comentario> hashSetComentario = new HashSet<Comentario>();
+        hashSetComentario.add(comentario);*/
+        CaracteristicaEnvase caracteristicaEnvase = new CaracteristicaEnvase();
+        caracteristicaEnvase.setIdCaracteristicaEnvase(1);
+        Envase envase = new Envase();
+        HashSet<CaracteristicaEnvase> hashSetCaracteristicas = new HashSet<CaracteristicaEnvase>();
+        hashSetCaracteristicas.add(caracteristicaEnvase);
+        envase.setCaracteristicasEnvase(hashSetCaracteristicas);
+        HashSet<Envase> hashSetEnvase = new HashSet<Envase>();
+        hashSetEnvase.add(envaseService.addEnvase(envase));
+        caracteristicaEnvase.setEnvases(hashSetEnvase);
+
         Producto producto = new Producto();
-        producto.setNombreProducto(nombreProducto);
-        producto.setCodigoBarra(codigoBarraProducto);
-        producto.setRubro(rubroProducto);
-        producto.setPorcion(porcionProducto);
-        producto.setTipoPorcion(tipoPorcionProducto);
-        producto.setMarca(marcaProducto);
-        producto.setContenidoNeto(contenidoNetoProducto);
-        producto.setEsAlimento(esAlimentoProducto);
-        producto.setEnvase(crearEnvase());
-        producto.setFabricante(crearFabricante());
-        producto.setIngredientes(crearListaIngredientes());
-        producto.setValoresEnergeticos(crearListaValoresEnergeticos());
-        producto.setExtras(crearListaExtras(productoService.addProducto(producto)));
+        producto.setExtras(hashSetExtra);
+        producto.setFabricante(fabricanteService.addFabricante(fabricante));
+        producto.setEnvase(envase);
+        producto.setIngredientes(hashSetIngredientes);
+
+        ProductoValorEnergetico productoValorEnergetico = new ProductoValorEnergetico();
+        productoValorEnergetico.setValorEnergetico(valorEnergeticoService.addValorEnergetico(valorEnergetico));
+        productoValorEnergetico.setProducto(productoService.addProducto(producto));
+        productoValorEnergetico.setValor(Float.valueOf(10));
+        HashSet<ProductoValorEnergetico> hashSetProductoValor = new HashSet<ProductoValorEnergetico>();
+        hashSetProductoValor.add(productoValorEnergetico);
+        producto.setProductoValorEnergetico(hashSetProductoValor);
+        productoValorEnergeticoService.addProductoValorEnergetico(productoValorEnergetico);
+        //producto.setComentarios(hashSetComentario);
+
+
         return "success";
     }
 
@@ -108,13 +144,13 @@ public class ProductoAction extends ActionSupport {
             valorEnergetico.setNombre(stringPropiedades[0]);
             valorEnergetico.setDescripcion(stringPropiedades[1]);
             valorEnergetico.setRecomendableDiario(Float.parseFloat(stringPropiedades[2]));
-            valorEnergetico.setValor(Float.parseFloat(stringPropiedades[3]));
             valorEnergetico.setTipoPorcion(stringPropiedades[4]);
             lista.add(valorEnergeticoService.addValorEnergetico(valorEnergetico));
         }
         return lista;
     }
 
+    /*
     public Set<Extra> crearListaExtras(Producto producto){
         Set<Extra> lista = new HashSet<Extra>();
         String[] arreglosInformacionExtra = this.informaciones.split("&");
@@ -147,7 +183,7 @@ public class ProductoAction extends ActionSupport {
         fabricante.setLocalidad(localidadFabricante);
         fabricante.setPais(paisFabricante);
         return fabricanteService.addFabricante(fabricante);
-    }
+    }*/
 
     public EnvaseService getEnvaseService() {
         return envaseService;
@@ -379,5 +415,13 @@ public class ProductoAction extends ActionSupport {
 
     public void setPaisFabricante(String paisFabricante) {
         this.paisFabricante = paisFabricante;
+    }
+
+    public String getNombreIngrediente() {
+        return nombreIngrediente;
+    }
+
+    public void setNombreIngrediente(String nombreIngrediente) {
+        this.nombreIngrediente = nombreIngrediente;
     }
 }

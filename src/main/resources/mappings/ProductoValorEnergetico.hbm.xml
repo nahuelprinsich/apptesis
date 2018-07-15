@@ -3,12 +3,12 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.tesis.models">
-    <class name="Comentario" table="comentario">
-        <id name="idComentario"  column="idComentario" unsaved-value="0" type="integer">
+    <class name="ProductoValorEnergetico" table="productovalorenergetico">
+        <id name="idProductoValorEnergetico"  column="idProductoValorEnergetico" unsaved-value="0" type="integer">
             <generator class="native" ></generator>
         </id>
-        <property name="descripcion" column="descripcion" type="string" length="50" />
-        <property name="puntaje" column="puntaje" />
+        <property name="valor" column="valor" />
+        <many-to-one name="valorEnergetico" column="ValorEnergetico_idValorEnergetico" class="ValorEnergetico" lazy="false"/>
         <many-to-one name="producto" column="Producto_idProducto" class="Producto" lazy="false"/>
     </class>
 </hibernate-mapping>

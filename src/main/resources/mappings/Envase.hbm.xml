@@ -7,13 +7,11 @@
         <id name="idEnvase" type="integer" column="idEnvase" unsaved-value="0">
             <generator class="native" ></generator>
         </id>
-        <property name="tipo" column="tipo" />
         <property name="descripcion" column="descripcion" />
-        <property name="ftalatos" column="ftalatos" />
-        <property name="retornable" column="retornable" />
-        <property name="reutilizable" column="reutilizable" />
-        <property name="marcado" column="marcado" />
-        <property name="reciclable" column="reciclable" />
-        <property name="aptoConsumo" column="aptoConsumo" />
+        <property name="urlImagen" column="urlImagen" />
+        <set name="caracteristicasEnvase" table="envase_caracteristicaenvase" fetch="join" lazy="false">
+            <key column="Envase_idEnvase"/>
+            <many-to-many column="CaracteristicaEnvase_idCaracteristicaEnvase" class="CaracteristicaEnvase"/>
+        </set>
     </class>
 </hibernate-mapping>

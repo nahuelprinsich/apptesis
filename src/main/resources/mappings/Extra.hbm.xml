@@ -8,8 +8,11 @@
             <generator class="native" ></generator>
         </id>
         <property name="descripcion" column="descripcion" type="string" length="50" />
-        <many-to-one name="producto" class="Producto" fetch="select">
-            <column name="Producto_idProducto" not-null="true" />
-        </many-to-one>
+        <property name="urlLogo" column="urlLogo" type="string" />
+        <property name="tipoRubro" column="tipoRubro" />
+        <set name="productos" table="producto_extra" fetch="join" lazy="false">
+            <key column="Extra_idExtra"/>
+            <many-to-many column="Producto_idProducto" class="Producto"/>
+        </set>
     </class>
 </hibernate-mapping>

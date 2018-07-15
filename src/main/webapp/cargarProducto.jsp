@@ -120,7 +120,7 @@
                         <h2 class="escondido">In</h2>
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ingredientes</div>
-                            <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.."></s:textfield>
+                            <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
                             <select multiple class="form-control" id="selectIngrediente">
                             </select>
                         </div>

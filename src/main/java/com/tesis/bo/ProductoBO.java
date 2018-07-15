@@ -2,6 +2,7 @@ package com.tesis.bo;
 
 import com.tesis.models.Producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,4 +21,8 @@ public interface ProductoBO extends GenericBO<Producto> {
     public List<Producto> getAllByIngrediente(List<String> ingredientes);
 
     public Producto addProducto(Producto producto);
+
+    public ArrayList getRubros();
+
+    public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion);
 }

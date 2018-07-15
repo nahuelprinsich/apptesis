@@ -10,6 +10,11 @@
          <result name="success">/index.jsp</result>
       </action>
 
+      <action name="BuscarIngrediente" method="buscarIngrediente"
+              class="com.tesis.actions.ProductoAction">
+         <result type="json"/>
+      </action>
+
       <!-- Action para el logueo de usuario con spring security -->
       <action name="security" class="security.action" method="execute">
          <result name="success">/index.jsp</result>

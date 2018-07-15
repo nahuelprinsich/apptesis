@@ -95,3 +95,18 @@ function quitarValorEnergetico() {
 function quitarInformacionExtra() {
     $("#selectInformacion").find(":selected").remove();
 }
+
+function buscarIngredientes() {
+    $.ajax({
+        type: "POST",
+        url: "BuscarIngrediente",
+        data: {
+            nombreIngrediente: $("#buscarIngrediente").val()
+        },
+        success: function (ingrediente) {
+            for(var i=0; i < ingrediente.listaBusqueda.length; i++){
+                console.log(ingrediente.listaBusqueda[i].nombre);
+            }
+        }
+    })
+}

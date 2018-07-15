@@ -5,6 +5,7 @@ import com.tesis.dao.ProductoDAO;
 import com.tesis.models.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,5 +43,13 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
 
     public Producto addProducto(Producto producto){
         return productoDAO.addProducto(producto);
+    }
+
+    public ArrayList getRubros() {
+        return productoDAO.getRubros();
+    }
+
+    public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion) {
+        return productoDAO.getProductosByRuInEx(rubro,ingredientes,extras,opcion);
     }
 }

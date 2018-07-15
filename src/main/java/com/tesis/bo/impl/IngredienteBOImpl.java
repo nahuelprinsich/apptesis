@@ -29,4 +29,12 @@ public class IngredienteBOImpl extends GenericBOImpl<Ingrediente> implements Ing
     public Ingrediente addIngrediente(Ingrediente ingrediente) {
         return ingredienteDAO.addIngrediente(ingrediente);
     }
+
+    public List<Ingrediente> getIngredienteByName(String nombreIngrediente) {
+        return ingredienteDAO.getIngredienteByName(nombreIngrediente);
+    }
+
+    public List<Ingrediente> getIngredientesByTipoRubro(String tipoRubro) {
+        return ingredienteDAO.getIngredientesByTipoRubro(tipoRubro);
+    }
 }

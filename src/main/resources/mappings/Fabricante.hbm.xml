@@ -7,9 +7,6 @@
         <id name="idFabricante" type="integer" column="idFabricante" unsaved-value="0">
             <generator class="native" ></generator>
         </id>
-        <property name="domicilio" column="domicilio" />
-        <property name="razonSocial" column="razonSocial" />
-        <property name="pais" column="pais" />
-        <property name="localidad" column="localidad" />
+        <property name="nombre" column="nombre" />
     </class>
 </hibernate-mapping>

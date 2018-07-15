@@ -21,19 +21,24 @@ public class Producto implements Serializable {
     private Boolean esAlimento;
     private Float porcion;
     private String tipoPorcion;
-    private Byte[] imagen;
     private Envase envase;
     private Fabricante fabricante;
+    @JsonManagedReference
     private Set<Comentario> comentarios;
+    @JsonManagedReference
     private Set<Extra> extras;
     @JsonManagedReference
     private Set<Ingrediente> ingredientes;
     //@JsonIgnore
     //private Set<ValorEnergeticoProducto> valorEnergeticoProductos;
+    //@JsonManagedReference
+    //private Set<ValorEnergetico> valoresEnergeticos;
     @JsonManagedReference
-    private Set<ValorEnergetico> valoresEnergeticos;
+    private Set<ProductoValorEnergetico> productoValorEnergetico;
     private String marca;
     private String contenidoNeto;
+    private String descripcion;
+    private String tipoRubro;
 
     public Producto(){
 
@@ -111,14 +116,6 @@ public class Producto implements Serializable {
         this.tipoPorcion = tipoPorcion;
     }
 
-    public Byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(Byte[] imagen) {
-        this.imagen = imagen;
-    }
-
     public Envase getEnvase() {
         return envase;
     }
@@ -159,11 +156,27 @@ public class Producto implements Serializable {
         this.ingredientes = ingredientes;
     }
 
-    public Set<ValorEnergetico> getValoresEnergeticos() {
-        return valoresEnergeticos;
+    public Set<ProductoValorEnergetico> getProductoValorEnergetico() {
+        return productoValorEnergetico;
     }
 
-    public void setValoresEnergeticos(Set<ValorEnergetico> valoresEnergeticos) {
-        this.valoresEnergeticos = valoresEnergeticos;
+    public void setProductoValorEnergetico(Set<ProductoValorEnergetico> productoValorEnergetico) {
+        this.productoValorEnergetico = productoValorEnergetico;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getTipoRubro() {
+        return tipoRubro;
+    }
+
+    public void setTipoRubro(String tipoRubro) {
+        this.tipoRubro = tipoRubro;
     }
 }

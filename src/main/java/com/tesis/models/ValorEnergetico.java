@@ -1,6 +1,7 @@
 package com.tesis.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,11 +15,8 @@ public class ValorEnergetico implements Serializable {
     private String nombre;
     private String descripcion;
     private Float recomendableDiario;
-    //private Set<ValorEnergeticoProducto> valorEnergeticoProductos;
-    @JsonBackReference
-    private Set<Producto> productos;
-    private Float valor;
     private String tipoPorcion;
+    private String linkInformacionExtra;
 
     public ValorEnergetico(){
 
@@ -56,35 +54,19 @@ public class ValorEnergetico implements Serializable {
         this.recomendableDiario = recomendableDiario;
     }
 
-    /*public Set<ValorEnergeticoProducto> getValorEnergeticoProductos() {
-        return valorEnergeticoProductos;
-    }
-
-    public void setValorEnergeticoProductos(Set<ValorEnergeticoProducto> valorEnergeticoProductos) {
-        this.valorEnergeticoProductos = valorEnergeticoProductos;
-    }*/
-
-    public Set<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
-    }
-
-    public Float getValor() {
-        return valor;
-    }
-
-    public void setValor(Float valor) {
-        this.valor = valor;
-    }
-
     public String getTipoPorcion() {
         return tipoPorcion;
     }
 
     public void setTipoPorcion(String tipoPorcion) {
         this.tipoPorcion = tipoPorcion;
+    }
+
+    public String getLinkInformacionExtra() {
+        return linkInformacionExtra;
+    }
+
+    public void setLinkInformacionExtra(String linkInformacionExtra) {
+        this.linkInformacionExtra = linkInformacionExtra;
     }
 }

@@ -6,6 +6,7 @@ import com.tesis.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -48,6 +49,19 @@ public class ProductoServiceImpl implements ProductoService {
 
     public Producto addProducto(Producto producto) {
         return productoBO.addProducto(producto);
+    }
+
+    @RequestMapping(value = "/getRubros", method = GET)
+    public ArrayList getRubros() {
+        return productoBO.getRubros();
+    }
+
+    @RequestMapping(value = "/getProductosByRuInEx", method = GET)
+    public List<Producto> getProductosByRuInEx(@RequestParam(value="rubro")String rubro,
+                                              @RequestParam(value="ingrediente") List<Integer> ingredientes,
+                                              @RequestParam(value="extra") List<Integer> extras,
+                                              @RequestParam(value="opcion") String opcion) {
+        return productoBO.getProductosByRuInEx(rubro,ingredientes,extras,opcion);
     }
 
     public ProductoBO getProductoBO() {

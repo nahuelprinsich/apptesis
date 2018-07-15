@@ -10,12 +10,7 @@
         <property name="nombre" column="nombre" />
         <property name="descripcion" column="descripcion" />
         <property name="recomendableDiario" column="recomendableDiario" />
-        <property name="valor" column="valor" />
         <property name="tipoPorcion" column="tipoPorcion" />
-        <set name="productos" table="producto_valorenergetico" fetch="join" lazy="false"  >
-            <key column="ValorEnergetico_idValorEnergetico"/>
-            <many-to-many column="Producto_idProducto" class="Producto" />
-        </set>
-
+        <property name="linkInformacionExtra" column="linkInformacionExtra" />
     </class>
 </hibernate-mapping>

@@ -4,6 +4,7 @@ import com.tesis.bo.IngredienteBO;
 import com.tesis.models.Ingrediente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +27,15 @@ public class IngredienteServiceImpl implements IngredienteService {
 
     public Ingrediente addIngrediente(Ingrediente ingrediente) {
         return ingredienteBO.addIngrediente(ingrediente);
+    }
+
+    public List<Ingrediente> getIngredienteByName(String nombreIngrediente) {
+        return ingredienteBO.getIngredienteByName(nombreIngrediente);
+    }
+
+    @RequestMapping(value = "/getIngredientesByTipoRubro", method = GET)
+    public List<Ingrediente> getIngredientesByTipoRubro(@RequestParam(value="tipoRubro") String tipoRubro) {
+        return ingredienteBO.getIngredientesByTipoRubro(tipoRubro);
     }
 
     public IngredienteBO getIngredienteBO() {

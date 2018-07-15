@@ -14,8 +14,10 @@ public class Ingrediente implements Serializable {
     private String nombre;
     private String descripcion;
     private Boolean conAdvertencia;
+    private String linkInformacionExtra;
     @JsonBackReference
     private Set<Producto> productos;
+    private String tipoRubro;
 
     public Ingrediente(){
 
@@ -59,5 +61,21 @@ public class Ingrediente implements Serializable {
 
     public void setProductos(Set<Producto> productos) {
         this.productos = productos;
+    }
+
+    public String getLinkInformacionExtra() {
+        return linkInformacionExtra;
+    }
+
+    public void setLinkInformacionExtra(String linkInformacionExtra) {
+        this.linkInformacionExtra = linkInformacionExtra;
+    }
+
+    public String getTipoRubro() {
+        return tipoRubro;
+    }
+
+    public void setTipoRubro(String tipoRubro) {
+        this.tipoRubro = tipoRubro;
     }
 }
