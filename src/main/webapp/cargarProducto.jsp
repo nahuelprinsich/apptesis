@@ -81,6 +81,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Ingredientes</h2>
+                        <!--
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="nombreIngrediente">Nombre:</label>
                             <div class="col-sm-8">
@@ -102,7 +103,9 @@
                         <div class="form-group">
                             <hr>
                         </div>
+                        -->
                     </div>
+                    <!--
                     <div class="col-sm-1">
                         <h2 class="escondido">In</h2>
                         <div class="form-group">
@@ -116,11 +119,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-5">
-                        <h2 class="escondido">In</h2>
+                    -->
+                    <div class="col-md-10 col-md-offset-1">
+                        <!--<h2 class="escondido">In</h2>-->
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ingredientes</div>
-                            <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">+</button>
+                                </div>
+                            </div>
                             <select multiple class="form-control" id="selectIngrediente">
                             </select>
                         </div>
@@ -129,6 +140,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Valores Energeticos</h2>
+                        <!--
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="nombreValorEnergetico">Nombre:</label>
                             <div class="col-sm-8">
@@ -161,8 +173,9 @@
                         </div>
                         <div class="form-group">
                             <hr>
-                        </div>
+                        </div>-->
                     </div>
+                    <!--
                     <div class="col-sm-1">
                         <h2 class="escondido">Va</h2>
                         <div class="form-group">
@@ -175,12 +188,17 @@
                                 <button type="button" class="btn btn-default" onclick="quitarValorEnergetico()">-</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <h2 class="escondido">Va</h2>
+                    </div>-->
+                    <div class="col-md-10 col-md-offset-1">
+                        <!--<h2 class="escondido">Va</h2>-->
                         <div class="panel panel-primary">
                             <div class="panel-heading">Valores Energeticos</div>
-                            <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
+                            <div class="col-sm-10">
+                                <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
+                            </div>
                             <select multiple class="form-control" id="selectValor">
                             </select>
                         </div>
@@ -326,6 +344,27 @@
                     </div>
                 </div>
             </form>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 </html>

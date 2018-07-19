@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.logging.Logger;
+
 /**
  * Created by Nahuel on 11/3/2018.
  */
@@ -14,10 +16,21 @@ public class EnvaseDAOImpl extends GenericDAOImpl<Envase> implements EnvaseDAO {
 
 
     public Envase addEnvase(Envase envase) {
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        this.getSessionFactory().getCurrentSession().saveOrUpdate(envase);
-        this.getSessionFactory().getCurrentSession().getTransaction().commit();
-        this.getSessionFactory().getCurrentSession().close();
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(envase);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
 
         return envase;
     }
