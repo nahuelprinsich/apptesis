@@ -4,6 +4,8 @@ import com.tesis.dao.ProductoDAO;
 import com.tesis.models.Producto;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
@@ -16,124 +18,235 @@ import java.util.List;
 public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements ProductoDAO {
 
     public Producto getProductoById(Integer id) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         Producto producto = new Producto();
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
-        criteria.add(Restrictions.eq("id", id));
-        producto = (Producto) criteria.uniqueResult();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Producto.class);
+            criteria.add(Restrictions.eq("id", id));
+            producto = (Producto) criteria.uniqueResult();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return producto;
     }
 
     public Producto getProductoByCodigo(String codigo) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         Producto producto = new Producto();
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
-        criteria.add(Restrictions.eq("codigoBarra", codigo));
-        producto = (Producto) criteria.uniqueResult();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Producto.class);
+            criteria.add(Restrictions.eq("codigoBarra", codigo));
+            producto = (Producto) criteria.uniqueResult();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return producto;
     }
 
     public List<Producto> getAllProductos() {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         List<Producto> lista;
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
-        lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Producto.class);
+            lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return lista;
     }
 
     public  List<Producto> getByRubro(String rubro){
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         List<Producto> lista;
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class);
-        criteria.add(Restrictions.eq("rubro", rubro));
-        lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Producto.class);
+            criteria.add(Restrictions.eq("rubro", rubro));
+            lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return lista;
     }
 
     public List<Producto> getAllByIngrediente(List<String> ingredientes) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         List<Producto> lista;
         List<String> ing = new ArrayList<String>();
         for (String ingrediente: ingredientes) {
             ing.add(ingrediente.replace("*", " "));
         }
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        Criteria criteria = this.getSessionFactory().getCurrentSession().createCriteria(Producto.class, "producto");
-        criteria.createAlias("producto.ingredientes", "ingrediente");
-        criteria.add(Restrictions.in("ingrediente.nombre", ing));
-        lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Producto.class, "producto");
+            criteria.createAlias("producto.ingredientes", "ingrediente");
+            criteria.add(Restrictions.in("ingrediente.nombre", ing));
+            lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return lista;
     }
 
     public Producto addProducto(Producto producto){
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        this.getSessionFactory().getCurrentSession().saveOrUpdate(producto);
-        this.getSessionFactory().getCurrentSession().getTransaction().commit();
-        this.getSessionFactory().getCurrentSession().close();
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(producto);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return producto;
     }
 
     public ArrayList getRubros() {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         ArrayList lista;
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        String hql = "SELECT distinct rubro,tipoRubro,idProducto FROM Producto";
-        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
-        lista = (ArrayList) query.list();
-        this.getSessionFactory().getCurrentSession().close();
+        try {
+            tx = session.beginTransaction();
+            String hql = "SELECT distinct rubro,tipoRubro,idProducto FROM Producto";
+            Query query = session.createQuery(hql);
+            lista = (ArrayList) query.list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return lista;
     }
 
     public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
         List<Producto> lista;
-        this.getSessionFactory().getCurrentSession().beginTransaction();
         String hql;
         Query query = null;
-        if (opcion.equals("r00")) {
-            hql = "SELECT distinct p " +
-                    "FROM Producto p " +
-                    "WHERE p.rubro = :rubro";
-            query = this.getSessionFactory().getCurrentSession().createQuery(hql)
-                    .setParameter("rubro",rubro);
-        } else if (opcion.equals("rii")) {
-            hql = "SELECT distinct p " +
-                    "FROM Producto p INNER JOIN p.ingredientes i " +
-                    "INNER JOIN p.extras e " +
-                    "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND e.idExtra IN (:extras)";
-            query = this.getSessionFactory().getCurrentSession().createQuery(hql)
-                    .setParameter("rubro",rubro)
-                    .setParameterList("ingredientes",ingredientes)
-                    .setParameterList("extras",extras);
-        } else if (opcion.equals("ri0")) {
-            hql = "SELECT distinct p " +
-                    "FROM Producto p INNER JOIN p.ingredientes i " +
-                    "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
-            query = this.getSessionFactory().getCurrentSession().createQuery(hql)
-                    .setParameter("rubro",rubro)
-                    .setParameterList("ingredientes",ingredientes);
-        } else if (opcion.equals("rei")) {
-            hql = "SELECT distinct p " +
-                    "FROM Producto p INNER JOIN p.ingredientes i " +
-                    "INNER JOIN p.extras e " +
-                    "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes) AND e.idExtra IN (:extras)";
-            query = this.getSessionFactory().getCurrentSession().createQuery(hql)
-                    .setParameter("rubro",rubro)
-                    .setParameterList("ingredientes",ingredientes)
-                    .setParameterList("extras",extras);
-        } else if (opcion.equals("re0")) {
-            hql = "SELECT distinct p " +
-                    "FROM Producto p INNER JOIN p.ingredientes i " +
-                    "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
-            query = this.getSessionFactory().getCurrentSession().createQuery(hql)
-                    .setParameter("rubro",rubro)
-                    .setParameterList("ingredientes",ingredientes);
+
+        try {
+            tx = session.beginTransaction();
+            if (opcion.equals("r00")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p " +
+                        "WHERE p.rubro = :rubro";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro);
+            } else if (opcion.equals("rii")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p INNER JOIN p.ingredientes i " +
+                        "INNER JOIN p.extras e " +
+                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND e.idExtra IN (:extras)";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro)
+                        .setParameterList("ingredientes",ingredientes)
+                        .setParameterList("extras",extras);
+            } else if (opcion.equals("ri0")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p INNER JOIN p.ingredientes i " +
+                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro)
+                        .setParameterList("ingredientes",ingredientes);
+            } else if (opcion.equals("rei")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p INNER JOIN p.ingredientes i " +
+                        "INNER JOIN p.extras e " +
+                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes) AND e.idExtra IN (:extras)";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro)
+                        .setParameterList("ingredientes",ingredientes)
+                        .setParameterList("extras",extras);
+            } else if (opcion.equals("re0")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p INNER JOIN p.ingredientes i " +
+                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro)
+                        .setParameterList("ingredientes",ingredientes);
+            } else if (opcion.equals("r0i")) {
+                hql = "SELECT distinct p " +
+                        "FROM Producto p INNER JOIN p.extras e " +
+                        "WHERE p.rubro = :rubro AND e.idExtra IN (:extras)";
+                query = session.createQuery(hql)
+                        .setParameter("rubro",rubro)
+                        .setParameterList("extras",extras);
+            }
+
+            lista = query.list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
         }
 
-        lista = query.list();
-        this.getSessionFactory().getCurrentSession().close();
         return lista;
     }
 

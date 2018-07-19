@@ -3,6 +3,8 @@ package com.tesis.dao.impl;
 import com.tesis.dao.GenericDAO;
 import com.tesis.dao.ProductoValorEnergeticoDAO;
 import com.tesis.models.ProductoValorEnergetico;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * Created by Nahuel on 9/7/2018.
@@ -10,10 +12,22 @@ import com.tesis.models.ProductoValorEnergetico;
 public class ProductoValorEnergeticoDAOImpl extends GenericDAOImpl<ProductoValorEnergetico> implements ProductoValorEnergeticoDAO {
 
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
-        this.getSessionFactory().getCurrentSession().beginTransaction();
-        this.getSessionFactory().getCurrentSession().save(productoValorEnergetico);
-        this.getSessionFactory().getCurrentSession().getTransaction().commit();
-        this.getSessionFactory().getCurrentSession().close();
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(productoValorEnergetico);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
         return productoValorEnergetico;
     }
 }
