@@ -2,6 +2,22 @@
  * Created by Nahuel on 30/4/2018.
  */
 
+$(document).ready(function() {
+    cargarTablas();
+
+    $('#tablaIngredientes tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    } );
+
+    $('#tablaValores tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    } );
+
+    $('#tablaExtras tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    } );
+} );
+
 function cargaProducto(){
     var ingredientes = "";
     var valoresEnergeticos = "";
@@ -112,8 +128,86 @@ function buscarIngredientes() {
 }
 
 
-function cargarIngredientes() {
+function cargarTablas() {
+    var resultIngredientes;
+    var resultValores;
+    var resultExtras;
+
+    $.ajax({
+        type: "GET",
+        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json",
+        dataType: "json",
+        async: false,
+        success : function(data) {
+            resultIngredientes = data;
+        }
+    });
+
     $('#tablaIngredientes').DataTable( {
-        "ajax": 'http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json'
+        "data": resultIngredientes,
+        "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+        }],
+        "columns": [
+            { "data": "idIngrediente" },
+            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "conAdvertencia" },
+            { "data": "linkInformacionExtra" },
+            { "data": "tipoRubro" }
+        ]
+    } );
+
+    $.ajax({
+        type: "GET",
+        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllValoresEnergeticos.json",
+        dataType: "json",
+        async: false,
+        success : function(data) {
+            resultValores = data;
+        }
+    });
+
+    $('#tablaValores').DataTable( {
+        "data": resultValores,
+        "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+        }],
+        "columns": [
+            { "data": "idIngrediente" },
+            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "conAdvertencia" },
+            { "data": "linkInformacionExtra" },
+            { "data": "tipoRubro" }
+        ]
+    } );
+
+    $.ajax({
+        type: "GET",
+        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllExtras.json",
+        dataType: "json",
+        async: false,
+        success : function(data) {
+            resultExtras = data;
+        }
+    });
+
+    $('#tablaExtras').DataTable( {
+        "data": resultExtras,
+        "columnDefs": [{
+            "defaultContent": "-",
+            "targets": "_all"
+        }],
+        "columns": [
+            { "data": "idIngrediente" },
+            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "conAdvertencia" },
+            { "data": "linkInformacionExtra" },
+            { "data": "tipoRubro" }
+        ]
     } );
 }

@@ -21,7 +21,7 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
-<body onload="cargarIngredientes()">
+<body>
     <div class="container">
             <form class="form-horizontal" id="formularioCarga" action="#">
                 <div class="row">
@@ -135,77 +135,82 @@
                     </div>
                 </div>
 
-
-                <!--
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Ingredientes</div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalIngrediente">+</button>
-                                </div>
-                            </div>
-                            <select multiple class="form-control" id="selectIngrediente">
-                            </select>
+                    <div class="col-sm-7">
+                        <h2>Ingredientes</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalIngrediente">+</button>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Valores Energeticos</div>
-                            <div class="col-md-11">
-                                <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
-                            </div>
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalValorEnergetico">+</button>
-                            </div>
-                            <select multiple class="form-control" id="selectValor">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Extras</div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <s:textfield name="buscarExtra" id="buscarExtra" class="form-control" placeholder="Buscar.." onkeyup="buscarExtras()"></s:textfield>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExtra">+</button>
-                                </div>
-                            </div>
-                            <select multiple class="form-control" id="selectIngrediente">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                -->
-
-                <table id="tablaIngredientes" class="display">
-                    <thead>
-                    <tr>
-                        <th>idIngrediente</th>
-                        <th>nombre</th>
-                        <th>descripcion</th>
-                        <th>conAdvertencia</th>
-                        <th>linkInformacionExtra</th>
-                        <th>tipoRubro</th>
-                    </tr>
-                    </thead>
-                </table>
-
-
-                <div class="row">
-                    <div class="col-sm-5">
+                        <table id="tablaIngredientes" class="display">
+                            <thead>
+                            <tr>
+                                <th>idIngrediente</th>
+                                <th>nombre</th>
+                                <th>descripcion</th>
+                                <th>conAdvertencia</th>
+                                <th>linkInformacionExtra</th>
+                                <th>tipoRubro</th>
+                            </tr>
+                            </thead>
+                        </table>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Valores Energeticos</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalValorEnergetico">+</button>
+                        </div>
+                        <table id="tablaValores" class="display">
+                            <thead>
+                            <tr>
+                                <th>idIngrediente</th>
+                                <th>nombre</th>
+                                <th>descripcion</th>
+                                <th>conAdvertencia</th>
+                                <th>linkInformacionExtra</th>
+                                <th>tipoRubro</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="form-group">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Extras</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExtra">+</button>
+                        </div>
+                        <table id="tablaExtras" class="display">
+                            <thead>
+                            <tr>
+                                <th>idIngrediente</th>
+                                <th>nombre</th>
+                                <th>descripcion</th>
+                                <th>conAdvertencia</th>
+                                <th>linkInformacionExtra</th>
+                                <th>tipoRubro</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="form-group">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <div class="col-sm-8">
                                 <s:submit type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
                             </div>
                         </div>
