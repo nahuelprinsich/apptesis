@@ -17,8 +17,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="resources/js/cargarProducto.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
-<body>
+<body onload="cargarIngredientes()">
     <div class="container">
             <form class="form-horizontal" id="formularioCarga" action="#">
                 <div class="row">
@@ -37,6 +40,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-4" for="tipoRubroProducto">Tipo Rubro:</label>
+                            <div class="col-sm-8">
+                                <s:select id="tipoRubroProducto"
+                                          headerKey="1"
+                                          list="#{'1':'Alimentacion', '2':'Cosmetica'}"
+                                          name="tipoRubroProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-sm-4" for="codigoBarraProducto">Codigo de barra:</label>
                             <div class="col-sm-8">
                                 <s:textfield name="codigoBarraProducto" id="codigoBarraProducto" class="form-control" placeholder="789686321265"></s:textfield>
@@ -51,7 +65,12 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="tipoPorcionProducto">Tipo de porcion:</label>
                             <div class="col-sm-8">
-                                <s:textfield name="tipoPorcionProducto" id="tipoPorcionProducto" class="form-control" placeholder="g, ml, .."></s:textfield>
+                                <s:select id="tipoPorcionProducto"
+                                          headerKey="1"
+                                          list="#{'1':'mg', '2':'g', '4':'ml', '5':'l'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,10 +86,33 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-4" for="descripcionProducto">Descripcion:</label>
+                            <div class="col-sm-8">
+                                <s:textarea name="descripcionProducto" id="descripcionProducto" class="form-control"></s:textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="checkbox">
                                     <s:checkbox name="esAlimentoProducto" id="esAlimentoProducto" fieldValue="false" label="Es Alimento?"/>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Envase</h2>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="descripcionEnvase">Descripcion:</label>
+                            <div class="col-sm-8">
+                                <s:textarea name="descripcionEnvase" id="descripcionEnvase" class="form-control"></s:textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="urlEnvase">Url de Imagen:</label>
+                            <div class="col-sm-8">
+                                <s:textfield name="urlEnvase" id="urlEnvase" class="form-control"></s:textfield>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,9 +121,109 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Ingredientes</h2>
-                        <!--
+                    <div class="col-sm-7">
+                        <h2>Fabricante</h2>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="razonSocialFabricante">Razon social:</label>
+                            <div class="col-sm-8">
+                                <s:textfield name="razonSocialFabricante" id="razonSocialFabricante" class="form-control" placeholder="La Serenisima, Sancor, .."></s:textfield>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Ingredientes</div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalIngrediente">+</button>
+                                </div>
+                            </div>
+                            <select multiple class="form-control" id="selectIngrediente">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Valores Energeticos</div>
+                            <div class="col-md-11">
+                                <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalValorEnergetico">+</button>
+                            </div>
+                            <select multiple class="form-control" id="selectValor">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Extras</div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <s:textfield name="buscarExtra" id="buscarExtra" class="form-control" placeholder="Buscar.." onkeyup="buscarExtras()"></s:textfield>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExtra">+</button>
+                                </div>
+                            </div>
+                            <select multiple class="form-control" id="selectIngrediente">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <table id="tablaIngredientes" class="display">
+                    <thead>
+                    <tr>
+                        <th>idIngrediente</th>
+                        <th>nombre</th>
+                        <th>descripcion</th>
+                        <th>conAdvertencia</th>
+                        <th>linkInformacionExtra</th>
+                        <th>tipoRubro</th>
+                    </tr>
+                    </thead>
+                </table>
+
+
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <s:submit type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        <!-- Modal Ingrediente-->
+        <div id="modalIngrediente" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ingrediente</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="nombreIngrediente">Nombre:</label>
                             <div class="col-sm-8">
@@ -91,7 +233,24 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="descripcionIngrediente">Descripcion:</label>
                             <div class="col-sm-8">
-                                <s:textfield name="descripcionIngrediente" id="descripcionIngrediente" class="form-control" placeholder=""></s:textfield>
+                                <s:textarea name="descripcionIngrediente" id="descripcionIngrediente" class="form-control" placeholder=""></s:textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="linkIngrediente">Link de informacion:</label>
+                            <div class="col-sm-8">
+                                <s:textfield name="linkIngrediente" id="linkIngrediente" class="form-control"></s:textfield>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tipoRubroIngrediente">Tipo de Rubro:</label>
+                            <div class="col-sm-8">
+                                <s:select id="tipoRubroIngrediente"
+                                          headerKey="1"
+                                          list="#{'1':'Alimentacion', '2':'Cosmetica'}"
+                                          name="tipoRubroIngrediente"
+                                          class="form-control"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
@@ -103,44 +262,26 @@
                         <div class="form-group">
                             <hr>
                         </div>
-                        -->
-                    </div>
-                    <!--
-                    <div class="col-sm-1">
-                        <h2 class="escondido">In</h2>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="agregarIngrediente()">+</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="quitarIngrediente()">-</button>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                    <div class="col-md-10 col-md-offset-1">
-                        <!--<h2 class="escondido">In</h2>-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Ingredientes</div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">+</button>
-                                </div>
-                            </div>
-                            <select multiple class="form-control" id="selectIngrediente">
-                            </select>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Valores Energeticos</h2>
-                        <!--
+
+            </div>
+        </div>
+
+        <!-- Modal Valor Energetico-->
+        <div id="modalValorEnergetico" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Valor Energetico</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="nombreValorEnergetico">Nombre:</label>
                             <div class="col-sm-8">
@@ -168,139 +309,43 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="tipoPorcionValorEnergetico">Tipo de porcion:</label>
                             <div class="col-sm-8">
-                                <s:textfield name="tipoPorcion" id="tipoPorcionValorEnergetico" class="form-control" placeholder="g, mg, .."></s:textfield>
+                                <s:select id="tipoPorcionValorEnergetico"
+                                          headerKey="1"
+                                          list="#{'1':'mg', '2':'g', '4':'ml', '5':'l'}"
+                                          name="tipoPorcionValorEnergetico"
+                                          class="form-control"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
-                            <hr>
-                        </div>-->
-                    </div>
-                    <!--
-                    <div class="col-sm-1">
-                        <h2 class="escondido">Va</h2>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="agregarValorEnergetico()">+</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="quitarValorEnergetico()">-</button>
-                            </div>
-                        </div>
-                    </div>-->
-                    <div class="col-md-10 col-md-offset-1">
-                        <!--<h2 class="escondido">Va</h2>-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Valores Energeticos</div>
-                            <div class="col-sm-10">
-                                <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
-                            </div>
-                            <div class="col-sm-2">
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
-                            </div>
-                            <select multiple class="form-control" id="selectValor">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-7">
-                        <h2>Envase</h2>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="tipoEnvase">Tipo:</label>
+                            <label class="control-label col-sm-4" for="linkValorEnergetico">Link de informacion:</label>
                             <div class="col-sm-8">
-                                <s:textfield name="tipoEnvase" id="tipoEnvase" class="form-control" placeholder="PET, PEAD, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="descripcionEnvase">Descripcion:</label>
-                            <div class="col-sm-8">
-                                <s:textfield name="descripcionEnvase" id="descripcionEnvase" class="form-control"></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="ftalatosEnvase" name="ftalatosEnvase" fieldValue="false" label="Posee ftalatos?"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="retornableEnvase" name="retornableEnvase" fieldValue="false" label="Es retornable?"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="reutilizableEnvase" name="reutilizableEnvase" fieldValue="false" label="Es reutilizable?"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="marcadoEnvase" name="marcadoEnvase" fieldValue="false" label="Esta marcado?"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="reciclableEnvase" name="reciclableEnvase" fieldValue="false" label="Es reciclable?"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="checkbox">
-                                    <s:checkbox id="aptoConsumoEnvase" name="aptoConsumoEnvase" fieldValue="false" label="Es apto para el consumo?"/>
-                                </div>
+                                <s:textfield name="linkValorEnergetico" id="linkValorEnergetico" class="form-control"></s:textfield>
                             </div>
                         </div>
                         <div class="form-group">
                             <hr>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-7">
-                        <h2>Fabricante</h2>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="razonSocialFabricante">Razon social:</label>
-                            <div class="col-sm-8">
-                                <s:textfield name="razonSocialFabricante" id="razonSocialFabricante" class="form-control" placeholder="La Serenisima, Sancor, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="domicilioFabricante">Domicilio:</label>
-                            <div class="col-sm-8">
-                                <s:textfield name="domicilioFabricante" id="domicilioFabricante" class="form-control" placeholder="Calle 1 N° 1234, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="localidadFabricante">Localidad:</label>
-                            <div class="col-sm-8">
-                                <s:textfield name="localidadFabricante" id="localidadFabricante" class="form-control" placeholder="La Plata, Buenos Aires, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="paisFabricante">Pais:</label>
-                            <div class="col-sm-8">
-                                <s:textfield name="paisFabricante" id="paisFabricante" class="form-control" placeholder="Argentina, Brasil, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <hr>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Informacion extra</h2>
+
+            </div>
+        </div>
+
+        <!-- Modal Extra-->
+        <div id="modalExtra" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Valor Energetico</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="descripcionExtra">Descripcion:</label>
                             <div class="col-sm-8">
@@ -308,63 +353,34 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-4" for="urlLogo">Url de logo:</label>
+                            <div class="col-sm-8">
+                                <s:textfield name="urlLogo" id="urlLogo" class="form-control"></s:textfield>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tipoRubroExtra">Tipo de Rubro:</label>
+                            <div class="col-sm-8">
+                                <s:select id="tipoRubroExtra"
+                                          headerKey="1"
+                                          list="#{'1':'Alimentacion', '2':'Cosmetica'}"
+                                          name="tipoRubroExtra"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <hr>
                         </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <h2 class="escondido">In</h2>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="agregarInformacionExtra()">+</button>
-                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <button type="button" class="btn btn-default" onclick="quitarInformacionExtra()">-</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <h2 class="escondido">In</h2>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Informacion Extra</div>
-                            <s:textfield name="buscarExtra" id="buscarExtra" class="form-control" placeholder="Buscar.."></s:textfield>
-                            <select multiple class="form-control" id="selectInformacion">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <s:submit type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
             </div>
         </div>
+
     </div>
 </body>
 </html>
