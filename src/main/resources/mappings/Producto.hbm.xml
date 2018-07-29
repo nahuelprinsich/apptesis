@@ -17,6 +17,7 @@
         <property name="contenidoNeto" column="contenidoNeto" />
         <property name="descripcion" column="descripcion" />
         <property name="tipoRubro" column="tipoRubro" />
+        <property name="urlImagen" column="urlImagen" />
         <many-to-one name="envase" column="Envase_idEnvase" class="Envase" lazy="false"/>
         <many-to-one name="fabricante" column="Fabricante_idFabricante" class="Fabricante" lazy="false"/>
         <set name="comentarios" table="comentario" fetch="join" lazy="false" >

@@ -110,3 +110,10 @@ function buscarIngredientes() {
         }
     })
 }
+
+
+function cargarIngredientes() {
+    $('#tablaIngredientes').DataTable( {
+        "ajax": 'http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json'
+    } );
+}

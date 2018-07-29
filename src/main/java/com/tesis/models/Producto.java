@@ -39,6 +39,7 @@ public class Producto implements Serializable {
     private String contenidoNeto;
     private String descripcion;
     private String tipoRubro;
+    private String urlImagen;
 
     public Producto(){
 
@@ -178,5 +179,13 @@ public class Producto implements Serializable {
 
     public void setTipoRubro(String tipoRubro) {
         this.tipoRubro = tipoRubro;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
     }
 }

@@ -12,7 +12,6 @@ public class Envase implements Serializable {
 
     private Integer idEnvase;
     private String descripcion;
-    private String urlImagen;
     @JsonManagedReference
     private Set<CaracteristicaEnvase> caracteristicasEnvase;
 
@@ -34,14 +33,6 @@ public class Envase implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
     }
 
     public Set<CaracteristicaEnvase> getCaracteristicasEnvase() {
