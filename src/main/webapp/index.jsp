@@ -25,7 +25,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <a href="modificarIngrediente.jsp"><button class="btn btn-default inputLogin inputIndex" type="button">Modificar Producto</button></a>
+                                    <!--<a href="modificarIngrediente.jsp"><button class="btn btn-default inputLogin inputIndex" type="button">Modificar Producto</button></a>-->
                                 </div>
                             </div>
                         </div>

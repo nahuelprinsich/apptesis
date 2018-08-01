@@ -57,4 +57,8 @@
         <property name="genericDAO" ref="productoValorEnergetico.hibernate.dao" />
     </bean>
 
+    <bean id="caracteristicaEnvase.bo" class="com.tesis.bo.impl.CaracteristicaEnvaseBOImpl">
+        <property name="caracteristicaEnvaseDAO" ref="caracteristicaEnvase.hibernate.dao" />
+    </bean>
+
 </beans>

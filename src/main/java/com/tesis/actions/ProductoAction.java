@@ -33,6 +33,8 @@ public class ProductoAction extends ActionSupport {
     private ValorEnergeticoService valorEnergeticoService;
     @Autowired
     private ProductoValorEnergeticoService productoValorEnergeticoService;
+    @Autowired
+    private CaracteristicaEnvaseService caracteristicaEnvaseService;
 
     /* Colecciones */
     private String ingredientes;
@@ -48,73 +50,131 @@ public class ProductoAction extends ActionSupport {
     private String marcaProducto;
     private String contenidoNetoProducto;
     private Boolean esAlimentoProducto;
+    private String descripcionProducto;
+    private String tipoRubroProducto;
+    private String urlImagenProducto;
     /* Envase */
-    private String tipoEnvase;
+    private String urlImagen;
     private String descripcionEnvase;
-    private Boolean ftalatosEnvase;
-    private Boolean retornableEnvase;
-    private Boolean reutilizableEnvase;
-    private Boolean marcadoEnvase;
-    private Boolean reciclableEnvase;
-    private Boolean aptoConsumoEnvase;
+    private String caracteristicaRetornable;
+    private String caracteristicaReutilizable;
+    private String caracteristicaReciclable;
+    private String caracteristicaCompostable;
+    private String caracteristicaMP;
+    private String caracteristicaCO;
 
     /* Fabricante */
     private String razonSocialFabricante;
-    private String domicilioFabricante;
-    private String localidadFabricante;
-    private String paisFabricante;
 
-    /* Busqueda de ingrediente */
-    private String nombreIngrediente;
-    private List<Ingrediente> listaBusqueda;
+    private String nombreIngredientes;
+    private String descripcionIngrediente;
+    private String linkIngrediente;
+    private String tipoRubroIngrediente;
+    private String conAdvertenciaIngrediente;
 
+    private String nombreValorEnergetico;
+    private String descripcionValorEnergetico;
+    private String recomendableValorEnergetico;
+    private String tipoPorcionValorEnergetico;
+    private String linkValorEnergetico;
+
+    private String descripcionExtra;
+    private String urlLogo;
+    private String tipoRubroExtra;
 
     public String execute(){
         return "success";
     }
 
-    public String buscarIngrediente(){
-        listaBusqueda = ingredienteService.getIngredienteByName(nombreIngrediente);
-        return SUCCESS;
+    public String cargarIngrediente(){
+        Ingrediente ingrediente = new Ingrediente();
+        ingrediente.setNombre(nombreIngredientes);
+        ingrediente.setDescripcion(descripcionIngrediente);
+        ingrediente.setLinkInformacionExtra(linkIngrediente);
+        ingrediente.setTipoRubro(tipoRubroIngrediente);
+        ingrediente.setConAdvertencia(Boolean.valueOf(conAdvertenciaIngrediente));
+        ingredienteService.addIngrediente(ingrediente);
+        return "success";
+    }
+
+    public String cargarValorEnergetico(){
+        ValorEnergetico valorEnergetico = new ValorEnergetico();
+        valorEnergetico.setNombre(nombreValorEnergetico);
+        valorEnergetico.setDescripcion(descripcionValorEnergetico);
+        valorEnergetico.setRecomendableDiario(Float.valueOf(recomendableValorEnergetico));
+        valorEnergetico.setTipoPorcion(tipoPorcionValorEnergetico);
+        valorEnergetico.setLinkInformacionExtra(linkValorEnergetico);
+        valorEnergeticoService.addValorEnergetico(valorEnergetico);
+        return "success";
+    }
+
+    public String cargarExtra(){
+        Extra extra = new Extra();
+        extra.setDescripcion(descripcionExtra);
+        extra.setUrlLogo(urlLogo);
+        extra.setTipoRubro(tipoRubroExtra);
+        extraService.addExtra(extra);
+        return "success";
     }
 
     public String cargarProducto(){
-        Ingrediente ingrediente = new Ingrediente();
-        HashSet<Ingrediente> hashSetIngredientes = new HashSet<Ingrediente>();
-        hashSetIngredientes.add(ingredienteService.addIngrediente(ingrediente));
-        ValorEnergetico valorEnergetico = new ValorEnergetico();
         Fabricante fabricante = new Fabricante();
-        Extra extra = new Extra();
-        HashSet<Extra> hashSetExtra = new HashSet<Extra>();
-        hashSetExtra.add(extraService.addExtra(extra));
-        /*Comentario comentario = new Comentario();
-        HashSet<Comentario> hashSetComentario = new HashSet<Comentario>();
-        hashSetComentario.add(comentario);*/
-        CaracteristicaEnvase caracteristicaEnvase = new CaracteristicaEnvase();
-        caracteristicaEnvase.setIdCaracteristicaEnvase(1);
-        Envase envase = new Envase();
+        fabricante.setNombre(razonSocialFabricante);
+
+        List<CaracteristicaEnvase> listaCaracteristicas = caracteristicaEnvaseService.getAllCaracteristicas();
         HashSet<CaracteristicaEnvase> hashSetCaracteristicas = new HashSet<CaracteristicaEnvase>();
+        CaracteristicaEnvase caracteristicaEnvase = new CaracteristicaEnvase();
+        caracteristicaEnvase.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaRetornable));
         hashSetCaracteristicas.add(caracteristicaEnvase);
+
+        CaracteristicaEnvase caracteristicaEnvase1 = new CaracteristicaEnvase();
+        caracteristicaEnvase1.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaReutilizable));
+        hashSetCaracteristicas.add(caracteristicaEnvase1);
+
+        CaracteristicaEnvase caracteristicaEnvase2 = new CaracteristicaEnvase();
+        caracteristicaEnvase2.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaReciclable));
+        hashSetCaracteristicas.add(caracteristicaEnvase2);
+
+        CaracteristicaEnvase caracteristicaEnvase3 = new CaracteristicaEnvase();
+        caracteristicaEnvase3.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaCompostable));
+        hashSetCaracteristicas.add(caracteristicaEnvase3);
+
+        CaracteristicaEnvase caracteristicaEnvase4 = new CaracteristicaEnvase();
+        caracteristicaEnvase4.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaMP));
+        hashSetCaracteristicas.add(caracteristicaEnvase4);
+
+        CaracteristicaEnvase caracteristicaEnvase5 = new CaracteristicaEnvase();
+        caracteristicaEnvase5.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaCO));
+        hashSetCaracteristicas.add(caracteristicaEnvase5);
+
+        Envase envase = new Envase();
+        envase.setDescripcion(descripcionEnvase);
+        envase.setUrlImagen(urlImagen);
         envase.setCaracteristicasEnvase(hashSetCaracteristicas);
         HashSet<Envase> hashSetEnvase = new HashSet<Envase>();
         hashSetEnvase.add(envaseService.addEnvase(envase));
-        caracteristicaEnvase.setEnvases(hashSetEnvase);
+        //caracteristicaEnvase.setEnvases(hashSetEnvase);
 
         Producto producto = new Producto();
-        producto.setExtras(hashSetExtra);
+        producto.setNombreProducto(nombreProducto);
+        producto.setCodigoBarra(codigoBarraProducto);
+        producto.setRubro(rubroProducto);
+        producto.setPorcion(porcionProducto);
+        producto.setTipoPorcion(tipoPorcionProducto);
+        producto.setMarca(marcaProducto);
+        producto.setContenidoNeto(contenidoNetoProducto);
+        producto.setEsAlimento(esAlimentoProducto);
+        producto.setDescripcion(descripcionProducto);
+        producto.setTipoRubro(tipoRubroProducto);
+        producto.setUrlImagen(urlImagenProducto);
+
+        producto.setExtras(crearListaExtras());
         producto.setFabricante(fabricanteService.addFabricante(fabricante));
         producto.setEnvase(envase);
-        producto.setIngredientes(hashSetIngredientes);
+        producto.setIngredientes(crearListaIngredientes());
 
-        ProductoValorEnergetico productoValorEnergetico = new ProductoValorEnergetico();
-        productoValorEnergetico.setValorEnergetico(valorEnergeticoService.addValorEnergetico(valorEnergetico));
-        productoValorEnergetico.setProducto(productoService.addProducto(producto));
-        productoValorEnergetico.setValor(Float.valueOf(10));
-        HashSet<ProductoValorEnergetico> hashSetProductoValor = new HashSet<ProductoValorEnergetico>();
-        hashSetProductoValor.add(productoValorEnergetico);
-        producto.setProductoValorEnergetico(hashSetProductoValor);
-        productoValorEnergeticoService.addProductoValorEnergetico(productoValorEnergetico);
-        //producto.setComentarios(hashSetComentario);
+        productoService.addProducto(producto);
+        crearListaValoresEnergeticos(producto);
 
 
         return "success";
@@ -124,66 +184,41 @@ public class ProductoAction extends ActionSupport {
         Set<Ingrediente> lista = new HashSet<Ingrediente>();
         String[] arregloIngredientes = this.ingredientes.split("&");
         for(String propiedad : arregloIngredientes){
-            String[] stringPropiedades = propiedad.split("-");
             Ingrediente ingrediente = new Ingrediente();
-            ingrediente.setNombre(stringPropiedades[0]);
-            ingrediente.setDescripcion(stringPropiedades[1]);
-            ingrediente.setConAdvertencia(Boolean.parseBoolean(stringPropiedades[2]));
-            //
-            lista.add(ingredienteService.addIngrediente(ingrediente));
+            ingrediente.setIdIngrediente(Integer.valueOf(propiedad));
+            lista.add(ingrediente);
         }
         return lista;
     }
 
-    public Set<ValorEnergetico> crearListaValoresEnergeticos(){
-        Set<ValorEnergetico> lista = new HashSet<ValorEnergetico>();
+    public Set<ProductoValorEnergetico> crearListaValoresEnergeticos(Producto producto){
+        Set<ProductoValorEnergetico> lista = new HashSet<ProductoValorEnergetico>();
         String[] arregloValoresEnergeticos = this.valoresEnergeticos.split("&");
         for(String propiedad : arregloValoresEnergeticos){
             String[] stringPropiedades = propiedad.split("-");
             ValorEnergetico valorEnergetico = new ValorEnergetico();
-            valorEnergetico.setNombre(stringPropiedades[0]);
-            valorEnergetico.setDescripcion(stringPropiedades[1]);
-            valorEnergetico.setRecomendableDiario(Float.parseFloat(stringPropiedades[2]));
-            valorEnergetico.setTipoPorcion(stringPropiedades[4]);
-            lista.add(valorEnergeticoService.addValorEnergetico(valorEnergetico));
+            valorEnergetico.setIdValorEnergetico(Integer.valueOf(stringPropiedades[0]));
+
+            ProductoValorEnergetico productoValorEnergetico = new ProductoValorEnergetico();
+            productoValorEnergetico.setValorEnergetico(valorEnergetico);
+            productoValorEnergetico.setValor(Float.valueOf(stringPropiedades[1]));
+            productoValorEnergetico.setProducto(producto);
+
+            lista.add(productoValorEnergeticoService.addProductoValorEnergetico(productoValorEnergetico));
         }
         return lista;
     }
 
-    /*
-    public Set<Extra> crearListaExtras(Producto producto){
+    public Set<Extra> crearListaExtras(){
         Set<Extra> lista = new HashSet<Extra>();
         String[] arreglosInformacionExtra = this.informaciones.split("&");
         for(String propiedad : arreglosInformacionExtra){
-            String[] stringPropiedades = propiedad.split("-");
             Extra extra = new Extra();
-            extra.setDescripcion(stringPropiedades[0]);
-            extra.setProducto(producto);
-            lista.add(extraService.addExtra(extra));
+            extra.setIdExtra(Integer.valueOf(propiedad));
+            lista.add(extra);
         }
         return lista;
     }
-
-    public Envase crearEnvase(){
-        Envase envase = new Envase();
-        envase.setAptoConsumo(aptoConsumoEnvase);
-        envase.setDescripcion(descripcionEnvase);
-        envase.setFtalatos(ftalatosEnvase);
-        envase.setMarcado(marcadoEnvase);
-        envase.setReciclable(reciclableEnvase);
-        envase.setRetornable(retornableEnvase);
-        envase.setReutilizable(reutilizableEnvase);
-        envase.setTipo(tipoEnvase);
-        return envaseService.addEnvase(envase);
-    }
-    public Fabricante crearFabricante(){
-        Fabricante fabricante = new Fabricante();
-        fabricante.setRazonSocial(razonSocialFabricante);
-        fabricante.setDomicilio(domicilioFabricante);
-        fabricante.setLocalidad(localidadFabricante);
-        fabricante.setPais(paisFabricante);
-        return fabricanteService.addFabricante(fabricante);
-    }*/
 
     public EnvaseService getEnvaseService() {
         return envaseService;
@@ -321,68 +356,12 @@ public class ProductoAction extends ActionSupport {
         this.esAlimentoProducto = esAlimentoProducto;
     }
 
-    public String getTipoEnvase() {
-        return tipoEnvase;
-    }
-
-    public void setTipoEnvase(String tipoEnvase) {
-        this.tipoEnvase = tipoEnvase;
-    }
-
     public String getDescripcionEnvase() {
         return descripcionEnvase;
     }
 
     public void setDescripcionEnvase(String descripcionEnvase) {
         this.descripcionEnvase = descripcionEnvase;
-    }
-
-    public Boolean getFtalatosEnvase() {
-        return ftalatosEnvase;
-    }
-
-    public void setFtalatosEnvase(Boolean ftalatosEnvase) {
-        this.ftalatosEnvase = ftalatosEnvase;
-    }
-
-    public Boolean getRetornableEnvase() {
-        return retornableEnvase;
-    }
-
-    public void setRetornableEnvase(Boolean retornableEnvase) {
-        this.retornableEnvase = retornableEnvase;
-    }
-
-    public Boolean getReutilizableEnvase() {
-        return reutilizableEnvase;
-    }
-
-    public void setReutilizableEnvase(Boolean reutilizableEnvase) {
-        this.reutilizableEnvase = reutilizableEnvase;
-    }
-
-    public Boolean getMarcadoEnvase() {
-        return marcadoEnvase;
-    }
-
-    public void setMarcadoEnvase(Boolean marcadoEnvase) {
-        this.marcadoEnvase = marcadoEnvase;
-    }
-
-    public Boolean getReciclableEnvase() {
-        return reciclableEnvase;
-    }
-
-    public void setReciclableEnvase(Boolean reciclableEnvase) {
-        this.reciclableEnvase = reciclableEnvase;
-    }
-
-    public Boolean getAptoConsumoEnvase() {
-        return aptoConsumoEnvase;
-    }
-
-    public void setAptoConsumoEnvase(Boolean aptoConsumoEnvase) {
-        this.aptoConsumoEnvase = aptoConsumoEnvase;
     }
 
     public String getRazonSocialFabricante() {
@@ -393,35 +372,203 @@ public class ProductoAction extends ActionSupport {
         this.razonSocialFabricante = razonSocialFabricante;
     }
 
-    public String getDomicilioFabricante() {
-        return domicilioFabricante;
+    public ProductoValorEnergeticoService getProductoValorEnergeticoService() {
+        return productoValorEnergeticoService;
     }
 
-    public void setDomicilioFabricante(String domicilioFabricante) {
-        this.domicilioFabricante = domicilioFabricante;
+    public void setProductoValorEnergeticoService(ProductoValorEnergeticoService productoValorEnergeticoService) {
+        this.productoValorEnergeticoService = productoValorEnergeticoService;
     }
 
-    public String getLocalidadFabricante() {
-        return localidadFabricante;
+    public String getUrlImagen() {
+        return urlImagen;
     }
 
-    public void setLocalidadFabricante(String localidadFabricante) {
-        this.localidadFabricante = localidadFabricante;
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
     }
 
-    public String getPaisFabricante() {
-        return paisFabricante;
+    public String getCaracteristicaRetornable() {
+        return caracteristicaRetornable;
     }
 
-    public void setPaisFabricante(String paisFabricante) {
-        this.paisFabricante = paisFabricante;
+    public void setCaracteristicaRetornable(String caracteristicaRetornable) {
+        this.caracteristicaRetornable = caracteristicaRetornable;
     }
 
-    public String getNombreIngrediente() {
-        return nombreIngrediente;
+    public String getCaracteristicaReutilizable() {
+        return caracteristicaReutilizable;
     }
 
-    public void setNombreIngrediente(String nombreIngrediente) {
-        this.nombreIngrediente = nombreIngrediente;
+    public void setCaracteristicaReutilizable(String caracteristicaReutilizable) {
+        this.caracteristicaReutilizable = caracteristicaReutilizable;
+    }
+
+    public String getCaracteristicaReciclable() {
+        return caracteristicaReciclable;
+    }
+
+    public void setCaracteristicaReciclable(String caracteristicaReciclable) {
+        this.caracteristicaReciclable = caracteristicaReciclable;
+    }
+
+    public String getCaracteristicaCompostable() {
+        return caracteristicaCompostable;
+    }
+
+    public void setCaracteristicaCompostable(String caracteristicaCompostable) {
+        this.caracteristicaCompostable = caracteristicaCompostable;
+    }
+
+    public String getCaracteristicaMP() {
+        return caracteristicaMP;
+    }
+
+    public void setCaracteristicaMP(String caracteristicaMP) {
+        this.caracteristicaMP = caracteristicaMP;
+    }
+
+    public String getCaracteristicaCO() {
+        return caracteristicaCO;
+    }
+
+    public void setCaracteristicaCO(String caracteristicaCO) {
+        this.caracteristicaCO = caracteristicaCO;
+    }
+
+    public CaracteristicaEnvaseService getCaracteristicaEnvaseService() {
+        return caracteristicaEnvaseService;
+    }
+
+    public void setCaracteristicaEnvaseService(CaracteristicaEnvaseService caracteristicaEnvaseService) {
+        this.caracteristicaEnvaseService = caracteristicaEnvaseService;
+    }
+
+    public String getDescripcionProducto() {
+        return descripcionProducto;
+    }
+
+    public void setDescripcionProducto(String descripcionProducto) {
+        this.descripcionProducto = descripcionProducto;
+    }
+
+    public String getTipoRubroProducto() {
+        return tipoRubroProducto;
+    }
+
+    public void setTipoRubroProducto(String tipoRubroProducto) {
+        this.tipoRubroProducto = tipoRubroProducto;
+    }
+
+    public String getUrlImagenProducto() {
+        return urlImagenProducto;
+    }
+
+    public void setUrlImagenProducto(String urlImagenProducto) {
+        this.urlImagenProducto = urlImagenProducto;
+    }
+
+    public String getNombreIngredientes() {
+        return nombreIngredientes;
+    }
+
+    public void setNombreIngredientes(String nombreIngredientes) {
+        this.nombreIngredientes = nombreIngredientes;
+    }
+
+    public String getDescripcionIngrediente() {
+        return descripcionIngrediente;
+    }
+
+    public void setDescripcionIngrediente(String descripcionIngrediente) {
+        this.descripcionIngrediente = descripcionIngrediente;
+    }
+
+    public String getLinkIngrediente() {
+        return linkIngrediente;
+    }
+
+    public void setLinkIngrediente(String linkIngrediente) {
+        this.linkIngrediente = linkIngrediente;
+    }
+
+    public String getTipoRubroIngrediente() {
+        return tipoRubroIngrediente;
+    }
+
+    public void setTipoRubroIngrediente(String tipoRubroIngrediente) {
+        this.tipoRubroIngrediente = tipoRubroIngrediente;
+    }
+
+    public String getConAdvertenciaIngrediente() {
+        return conAdvertenciaIngrediente;
+    }
+
+    public void setConAdvertenciaIngrediente(String conAdvertenciaIngrediente) {
+        this.conAdvertenciaIngrediente = conAdvertenciaIngrediente;
+    }
+
+    public String getNombreValorEnergetico() {
+        return nombreValorEnergetico;
+    }
+
+    public void setNombreValorEnergetico(String nombreValorEnergetico) {
+        this.nombreValorEnergetico = nombreValorEnergetico;
+    }
+
+    public String getDescripcionValorEnergetico() {
+        return descripcionValorEnergetico;
+    }
+
+    public void setDescripcionValorEnergetico(String descripcionValorEnergetico) {
+        this.descripcionValorEnergetico = descripcionValorEnergetico;
+    }
+
+    public String getRecomendableValorEnergetico() {
+        return recomendableValorEnergetico;
+    }
+
+    public void setRecomendableValorEnergetico(String recomendableValorEnergetico) {
+        this.recomendableValorEnergetico = recomendableValorEnergetico;
+    }
+
+    public String getTipoPorcionValorEnergetico() {
+        return tipoPorcionValorEnergetico;
+    }
+
+    public void setTipoPorcionValorEnergetico(String tipoPorcionValorEnergetico) {
+        this.tipoPorcionValorEnergetico = tipoPorcionValorEnergetico;
+    }
+
+    public String getLinkValorEnergetico() {
+        return linkValorEnergetico;
+    }
+
+    public void setLinkValorEnergetico(String linkValorEnergetico) {
+        this.linkValorEnergetico = linkValorEnergetico;
+    }
+
+    public String getDescripcionExtra() {
+        return descripcionExtra;
+    }
+
+    public void setDescripcionExtra(String descripcionExtra) {
+        this.descripcionExtra = descripcionExtra;
+    }
+
+    public String getUrlLogo() {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo) {
+        this.urlLogo = urlLogo;
+    }
+
+    public String getTipoRubroExtra() {
+        return tipoRubroExtra;
+    }
+
+    public void setTipoRubroExtra(String tipoRubroExtra) {
+        this.tipoRubroExtra = tipoRubroExtra;
     }
 }

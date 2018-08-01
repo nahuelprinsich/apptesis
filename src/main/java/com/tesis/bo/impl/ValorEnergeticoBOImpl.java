@@ -5,6 +5,8 @@ import com.tesis.dao.ValorEnergeticoDAO;
 import com.tesis.models.ValorEnergetico;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by Nahuel on 11/3/2018.
  */
@@ -22,5 +24,9 @@ public class ValorEnergeticoBOImpl extends GenericBOImpl<ValorEnergetico> implem
 
     public ValorEnergetico addValorEnergetico(ValorEnergetico valorEnergetico) {
         return valorEnergeticoDAO.addValorEnergetico(valorEnergetico);
+    }
+
+    public List<ValorEnergetico> getAllValoresEnergeticos() {
+        return valorEnergeticoDAO.getAllValoresEnergeticos();
     }
 }

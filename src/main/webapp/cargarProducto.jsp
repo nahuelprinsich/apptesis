@@ -20,8 +20,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="resources/js/dataTables.cellEdit.js"></script>
 </head>
-<body onload="cargarIngredientes()">
+<body>
     <div class="container">
             <form class="form-horizontal" id="formularioCarga" action="#">
                 <div class="row">
@@ -92,6 +93,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-4" for="urlImagenProducto">Url Imagen:</label>
+                            <div class="col-sm-8">
+                                <s:textfield name="urlImagenProducto" id="urlImagenProducto" class="form-control"></s:textfield>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="checkbox">
                                     <s:checkbox name="esAlimentoProducto" id="esAlimentoProducto" fieldValue="false" label="Es Alimento?"/>
@@ -110,9 +117,75 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4" for="urlEnvase">Url de Imagen:</label>
+                            <label class="control-label col-sm-4" for="urlImagen">Url de Imagen:</label>
                             <div class="col-sm-8">
-                                <s:textfield name="urlEnvase" id="urlEnvase" class="form-control"></s:textfield>
+                                <s:textfield name="urlEnvase" id="urlImagen" class="form-control"></s:textfield>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaRetornable">Retornable:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaRetornable"
+                                          headerKey="1"
+                                          list="#{'1':'Retornable reutilizable', '2':'Retornable reciclable', '3':'Potencialmente retornable', '4':'No retornable'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaReutilizable">Reutilizable:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaReutilizable"
+                                          headerKey="1"
+                                          list="#{'5':'Muy reutilizable', '6':'Poco reutilizable', '7':'No reutilizable o raramente reutilizable'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaReciclable">Reciclable:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaReciclable"
+                                          headerKey="1"
+                                          list="#{'8':'Reciclable facil', '9':'Reciclable dificil', '10':'No reciclable', '11':'Tratamiento especial'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaCompostable">Compostable:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaCompostable"
+                                          headerKey="1"
+                                          list="#{'12':'Compostable', '13':'No compostable'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaMP">Materias primas recicladas:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaMP"
+                                          headerKey="1"
+                                          list="#{'14':'Altamente Recicladas', '15':'Recicladas Parcialmente', '16':'No recicladas'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="caracteristicaCO">Certificacion origen materias primas:</label>
+                            <div class="col-sm-8">
+                                <s:select id="caracteristicaCO"
+                                          headerKey="1"
+                                          list="#{'17':'Certificada', '18':'No certificada'}"
+                                          name="tipoPorcionProducto"
+                                          class="form-control"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,77 +208,80 @@
                     </div>
                 </div>
 
-
-                <!--
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Ingredientes</div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <s:textfield name="buscarIngrediente" id="buscarIngrediente" class="form-control" placeholder="Buscar.." onkeyup="buscarIngredientes()"></s:textfield>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalIngrediente">+</button>
-                                </div>
-                            </div>
-                            <select multiple class="form-control" id="selectIngrediente">
-                            </select>
+                    <div class="col-sm-7">
+                        <h2>Ingredientes</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalIngrediente">+</button>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Valores Energeticos</div>
-                            <div class="col-md-11">
-                                <s:textfield name="buscarValor" id="buscarValor" class="form-control" placeholder="Buscar.."></s:textfield>
-                            </div>
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalValorEnergetico">+</button>
-                            </div>
-                            <select multiple class="form-control" id="selectValor">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Extras</div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <s:textfield name="buscarExtra" id="buscarExtra" class="form-control" placeholder="Buscar.." onkeyup="buscarExtras()"></s:textfield>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExtra">+</button>
-                                </div>
-                            </div>
-                            <select multiple class="form-control" id="selectIngrediente">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                -->
-
-                <table id="tablaIngredientes" class="display">
-                    <thead>
-                    <tr>
-                        <th>idIngrediente</th>
-                        <th>nombre</th>
-                        <th>descripcion</th>
-                        <th>conAdvertencia</th>
-                        <th>linkInformacionExtra</th>
-                        <th>tipoRubro</th>
-                    </tr>
-                    </thead>
-                </table>
-
-
-                <div class="row">
-                    <div class="col-sm-5">
+                        <table id="tablaIngredientes" class="display">
+                            <thead>
+                            <tr>
+                                <th>idIngrediente</th>
+                                <th>nombre</th>
+                                <th>descripcion</th>
+                                <th>conAdvertencia</th>
+                                <th>linkInformacionExtra</th>
+                                <th>tipoRubro</th>
+                            </tr>
+                            </thead>
+                        </table>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Valores Energeticos</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalValorEnergetico">+</button>
+                        </div>
+                        <table id="tablaValores" class="display">
+                            <thead>
+                            <tr>
+                                <th>idValorEnergetico</th>
+                                <th>nombre</th>
+                                <th>descripcion</th>
+                                <th>recomendableDiario</th>
+                                <th>tipoPorcion</th>
+                                <th>linkInformacionExtra</th>
+                                <th>valor</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="form-group">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Extras</h2>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExtra">+</button>
+                        </div>
+                        <table id="tablaExtras" class="display">
+                            <thead>
+                            <tr>
+                                <th>idExtra</th>
+                                <th>descripcion</th>
+                                <th>urlLogo</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="form-group">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <div class="col-sm-8">
                                 <s:submit type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
                             </div>
                         </div>
@@ -263,7 +339,7 @@
                             <hr>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" onclick="cargarIngrediente()">Cargar</button>
                         </div>
                     </div>
                 </div>
@@ -297,13 +373,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="recomendableValorEnergetico">Recomendable diario:</label>
                             <div class="col-sm-8">
-                                <s:textfield type="number" name="recomendableDiario" id="recomendableValorEnergetico" class="form-control" placeholder="2.1, .."></s:textfield>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="valorValorEnergetico">Valor:</label>
-                            <div class="col-sm-8">
-                                <s:textfield type="number" name="valor" id="valorValorEnergetico" class="form-control" placeholder="3.8, .."></s:textfield>
+                                <s:textfield type="number" name="recomendableValorEnergetico" id="recomendableValorEnergetico" class="form-control" placeholder="2.1, .."></s:textfield>
                             </div>
                         </div>
                         <div class="form-group">
@@ -327,7 +397,7 @@
                             <hr>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" onclick="cargarValorEnergetico()">Cargar</button>
                         </div>
                     </div>
                 </div>
@@ -373,7 +443,7 @@
                             <hr>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" onclick="cargarExtra()">Cargar</button>
                         </div>
                     </div>
                 </div>
