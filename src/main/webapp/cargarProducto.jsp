@@ -416,7 +416,7 @@
                             <div class="col-sm-8">
                                 <s:select id="tipoPorcionValorEnergetico"
                                           headerKey="1"
-                                          list="#{'1':'mg', '2':'g', '4':'ml', '5':'l'}"
+                                          list="#{'1':'mg', '2':'g', '4':'ml', '5':'l', '6':'kcal'}"
                                           name="tipoPorcionValorEnergetico"
                                           class="form-control"
                                 />
