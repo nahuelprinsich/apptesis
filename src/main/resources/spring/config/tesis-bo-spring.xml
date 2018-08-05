@@ -61,4 +61,8 @@
         <property name="caracteristicaEnvaseDAO" ref="caracteristicaEnvase.hibernate.dao" />
     </bean>
 
+    <bean id="usuario.bo" class="com.tesis.bo.impl.UsuarioBOImpl">
+        <property name="usuarioDAO" ref="usuario.hibernate.dao" />
+    </bean>
+
 </beans>

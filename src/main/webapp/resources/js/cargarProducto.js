@@ -31,7 +31,13 @@ function cargaProducto(){
     }
 
     for (var i = 0; i < tablaValores.length; i++) {
-        valoresEnergeticos = valoresEnergeticos + tablaValores[i].idValorEnergetico + "-" + tablaValores[i].valor + "&";
+        valoresEnergeticos = valoresEnergeticos + tablaValores[i].idValorEnergetico + "-";
+        if($.isNumeric(tablaValores[i].valor)){
+            valoresEnergeticos = valoresEnergeticos + tablaValores[i].valor + "&";
+        } else {
+            valoresEnergeticos = valoresEnergeticos + "0" + "&";
+        }
+
     }
 
     for (var i = 0; i < tablaExtras.length; i++) {
@@ -45,20 +51,19 @@ function cargaProducto(){
             ingredientes: ingredientes,
             valoresEnergeticos: valoresEnergeticos,
             informaciones: informaciones,
-            nombreProducto: $("#nombreProducto").val(),
-            rubroProducto: $("#rubroProducto").val(),
+            nombreProducto: $("#nombreProducto").val().toLowerCase(),
+            rubroProducto: $("#rubroProducto").val().toLowerCase(),
             codigoBarraProducto: $("#codigoBarraProducto").val(),
             porcionProducto: $("#porcionProducto").val(),
             tipoPorcionProducto: $("#tipoPorcionProducto").val(),
-            marcaProducto: $("#marcaProducto").val(),
-            contenidoNetoProducto: $("#contenidoNetoProducto").val(),
+            marcaProducto: $("#marcaProducto").val().toLowerCase(),
+            contenidoNetoProducto: $("#contenidoNetoProducto").val().toLowerCase(),
             esAlimentoProducto: $("#esAlimentoProducto").is(":checked"),
-            descripcionProducto: $("#descripcionProducto").val(),
+            descripcionProducto: $("#descripcionProducto").val().toLowerCase(),
             tipoRubroProducto: $("#tipoRubroProducto").val(),
             urlImagenProducto: $("#urlImagenProducto").val(),
 
-            descripcionEnvase: $("#descripcionEnvase").val(),
-            urlImagen: $("#urlImagen").val(),
+            descripcionEnvase: $("#descripcionEnvase").val().toLowerCase(),
             caracteristicaRetornable: $("#caracteristicaRetornable").val(),
             caracteristicaReutilizable: $("#caracteristicaReutilizable").val(),
             caracteristicaReciclable: $("#caracteristicaReciclable").val(),
@@ -66,10 +71,13 @@ function cargaProducto(){
             caracteristicaMP: $("#caracteristicaMP").val(),
             caracteristicaCO: $("#caracteristicaCO").val(),
 
-            razonSocialFabricante: $("#razonSocialFabricante").val()
+            razonSocialFabricante: $("#razonSocialFabricante").val().toLowerCase(),
+
+            nombreUsuario: $("#nombreUsuario").val().toLowerCase(),
+            apellidoUsuario: $("#apellidoUsuario").val().toLowerCase()
         },
         success: function () {
-
+            location.reload();
         }
     })
 
@@ -78,11 +86,13 @@ function cargaProducto(){
 }
 
 function cargarTablas() {
-    var resultIngredientes;
-    var resultValores;
-    var resultExtras;
-    var tablaValoresE;
+    cargarTablaIngredientes();
+    cargarTablaValores();
+    cargarTablaExtras();
+}
 
+function cargarTablaIngredientes() {
+    var resultIngredientes;
     $.ajax({
         type: "GET",
         //url: "http://localhost:8080/proyecto-tesis/getAllIngredientes.json",
@@ -95,7 +105,9 @@ function cargarTablas() {
     });
 
     $('#tablaIngredientes').DataTable( {
+        dom: 'Bfrtip',
         "bLengthChange": false,
+        "pageLength": 10,
         "data": resultIngredientes,
         "columnDefs": [{
             "defaultContent": "-",
@@ -106,19 +118,22 @@ function cargarTablas() {
             { "data": "nombre" },
             { "data": "descripcion" },
             { "data": "conAdvertencia" },
-            { "data": "linkInformacionExtra" },
             { "data": "tipoRubro" }
         ],
-            "buttons": [
-                {
-                    text: 'Nuevo',
-                    action: function ( e, dt, node, config ) {
-                        $('#modalIngrediente').modal('show');
-                    }
+        buttons: [
+            {
+                text: "Agregar",
+                action: function () {
+                    $('#modalIngrediente').modal('show');
                 }
-            ]
+            }
+        ]
     } );
+}
 
+function cargarTablaValores() {
+    var resultValores;
+    var tablaValoresE;
     $.ajax({
         type: "GET",
         //url: "http://localhost:8080/proyecto-tesis/getAllValoresEnergeticos.json",
@@ -131,10 +146,12 @@ function cargarTablas() {
     });
 
     tablaValoresE = $('#tablaValores').DataTable( {
+        dom: 'Bfrtip',
         "bLengthChange": false,
+        "pageLength": 10,
         "data": resultValores,
         "columnDefs": [{
-            "defaultContent": "-",
+            "defaultContent": "Ingrese un valor",
             "targets": "_all"
         }],
         "columns": [
@@ -143,22 +160,32 @@ function cargarTablas() {
             { "data": "descripcion" },
             { "data": "recomendableDiario" },
             { "data": "tipoPorcion" },
-            { "data": "linkInformacionExtra" },
             { "data": "valor" }
+        ],
+        buttons: [
+            {
+                text: "Agregar",
+                action: function () {
+                    $('#modalValorEnergetico').modal('show');
+                }
+            }
         ]
     } );
     tablaValoresE.MakeCellsEditable({
         "onUpdate": myCallbackFunction,
-        "columns": [6],
+        "columns": [5],
         "inputTypes": [
             {
-                "column": 6,
+                "column": 5,
                 "type": "text",
                 "options": null
             }
         ]
     });
+}
 
+function cargarTablaExtras() {
+    var resultExtras;
     $.ajax({
         type: "GET",
         //url: "http://localhost:8080/proyecto-tesis/getAllExtras.json",
@@ -171,7 +198,9 @@ function cargarTablas() {
     });
 
     $('#tablaExtras').DataTable( {
+        dom: 'Bfrtip',
         "bLengthChange": false,
+        "pageLength": 10,
         "data": resultExtras,
         "columnDefs": [{
             "defaultContent": "-",
@@ -180,9 +209,18 @@ function cargarTablas() {
         "columns": [
             { "data": "idExtra" },
             { "data": "descripcion" },
-            { "data": "urlLogo" }
+            { "data": "tipoRubro"}
+        ],
+        buttons: [
+            {
+                text: "Agregar",
+                action: function () {
+                    $('#modalExtra').modal('show');
+                }
+            }
         ]
     } );
+
 }
 
 function myCallbackFunction (updatedCell, updatedRow, oldValue) {
@@ -197,10 +235,10 @@ function cargarIngrediente() {
         type: "POST",
         url: "CargarIngrediente",
         data: {
-            nombreIngredientes: $("#nombreIngredientes").val(),
-            descripcionIngrediente: $("#descripcionIngrediente").val(),
+            nombreIngrediente: $("#nombreIngrediente").val().toLowerCase(),
+            descripcionIngrediente: $("#descripcionIngrediente").val().toLowerCase(),
             linkIngrediente: $("#linkIngrediente").val(),
-            tipoRubroIngrediente: $("#tipoRubroIngrediente").val(),
+            tipoRubroIngrediente: $("#tipoRubroIngrediente option:selected").text(),
             conAdvertenciaIngrediente: $("#conAdvertenciaIngrediente").val()
         },
         success: function () {
@@ -208,10 +246,7 @@ function cargarIngrediente() {
         }
     });
 
-    $('#tablaIngredientes').DataTable().destroy();
-    cargarTablas();
-
-    return false;
+    location.reload();
 }
 
 function cargarValorEnergetico() {
@@ -219,10 +254,10 @@ function cargarValorEnergetico() {
         type: "POST",
         url: "CargarValorEnergetico",
         data: {
-            nombreValorEnergetico: $("#nombreValorEnergetico").val(),
-            descripcionValorEnergetico: $("#descripcionValorEnergetico").val(),
+            nombreValorEnergetico: $("#nombreValorEnergetico").val().toLowerCase(),
+            descripcionValorEnergetico: $("#descripcionValorEnergetico").val().toLowerCase(),
             recomendableValorEnergetico: $("#recomendableValorEnergetico").val(),
-            tipoPorcionValorEnergetico: $("#tipoPorcionValorEnergetico").val(),
+            tipoPorcionValorEnergetico: $("#tipoPorcionValorEnergetico option:selected").text(),
             linkValorEnergetico: $("#linkValorEnergetico").val()
         },
         success: function () {
@@ -230,10 +265,7 @@ function cargarValorEnergetico() {
         }
     });
 
-    $('#tablaValores').DataTable().destroy();
-    cargarTablas()
-
-    return false;
+    location.reload();
 }
 
 function cargarExtra() {
@@ -241,17 +273,14 @@ function cargarExtra() {
         type: "POST",
         url: "CargarExtra",
         data: {
-            descripcionExtra: $("#descripcionExtra").val(),
+            descripcionExtra: $("#descripcionExtra").val().toLowerCase(),
             urlLogo: $("#urlLogo").val(),
-            tipoRubroExtra: $("#tipoRubroExtra").val()
+            tipoRubroExtra: $("#tipoRubroExtra option:selected").text()
         },
         success: function () {
 
         }
     });
 
-    $('#tablaExtras').DataTable().destroy();
-    cargarTablas();
-
-    return false;
+    location.reload();
 }

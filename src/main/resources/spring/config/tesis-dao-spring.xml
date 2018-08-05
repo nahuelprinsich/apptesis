@@ -46,7 +46,12 @@
     <bean id="productoValorEnergetico.hibernate.dao" class="com.tesis.dao.impl.ProductoValorEnergeticoDAOImpl" >
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+
     <bean id="caracteristicaEnvase.hibernate.dao" class="com.tesis.dao.impl.CaracteristicaEnvaseDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="usuario.hibernate.dao" class="com.tesis.dao.impl.UsuarioDAOImpl" >
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 

@@ -40,6 +40,7 @@ public class Producto implements Serializable {
     private String descripcion;
     private String tipoRubro;
     private String urlImagen;
+    private Usuario usuario;
 
     public Producto(){
 
@@ -187,5 +188,13 @@ public class Producto implements Serializable {
 
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

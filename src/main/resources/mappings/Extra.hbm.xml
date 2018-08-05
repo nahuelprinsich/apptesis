@@ -7,7 +7,7 @@
         <id name="idExtra"  column="idExtra" unsaved-value="0" type="integer">
             <generator class="native" ></generator>
         </id>
-        <property name="descripcion" column="descripcion" type="string" length="50" />
+        <property name="descripcion" column="descripcion" type="string" />
         <property name="urlLogo" column="urlLogo" type="string" />
         <property name="tipoRubro" column="tipoRubro" />
         <set name="productos" table="producto_extra" fetch="join" lazy="false">

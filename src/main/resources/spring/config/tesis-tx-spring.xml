@@ -60,6 +60,7 @@
                 <value>mappings/ValorEnergetico.hbm.xml</value>
                 <value>mappings/ProductoValorEnergetico.hbm.xml</value>
                 <value>mappings/CaracteristicaEnvase.hbm.xml</value>
+                <value>mappings/Usuario.hbm.xml</value>
             </list>
         </property>
     </bean>
