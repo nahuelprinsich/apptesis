@@ -207,7 +207,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             } else if (opcion.equals("ri0")) {
                 hql = "SELECT distinct p " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
-                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
+                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes)";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes);
