@@ -163,7 +163,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         ArrayList lista;
         try {
             tx = session.beginTransaction();
-            String hql = "SELECT distinct rubro,tipoRubro,idProducto FROM Producto";
+            String hql = "SELECT rubro,tipoRubro,idProducto FROM Producto GROUP BY rubro";
             Query query = session.createQuery(hql);
             lista = (ArrayList) query.list();
             tx.commit();
