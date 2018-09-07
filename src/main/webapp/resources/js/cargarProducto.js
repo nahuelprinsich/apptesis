@@ -71,7 +71,7 @@ $(document).ready(function() {
                         });
                     } );
 
-                tablaExtras.column( 0 ).data()
+                tablaExtras.column( 0 ).data().reverse()
                     .each( function ( value, index ) {
                         $.each(data["extras"],function (index2,valor) {
                             if(valor.idExtra == value ){
