@@ -19,14 +19,14 @@
         <property name="username" value="root" />-->
 
         <!-- Base Remota -->
-        <property name="url" value="jdbc:mysql://nahuelp.heliohost.org:8080/nahuelp_tesisNueva" />
+        <!--<property name="url" value="jdbc:mysql://nahuelp.heliohost.org:8080/nahuelp_tesisNueva" />
         <property name="username" value="nahuelp_root" />
-        <property name="password" value="rootnahuel" />
+        <property name="password" value="rootnahuel" />-->
 
         <!-- Base Remota -->
-        <!--<property name="url" value="jdbc:mysql://sql135.main-hosting.eu.:8080/u745867915_tesis" />
+        <property name="url" value="jdbc:mysql://sql135.main-hosting.eu.:8080/u745867915_tesis" />
         <property name="username" value="u745867915_admin" />
-        <property name="password" value="admintesis" />-->
+        <property name="password" value="admintesis" />
     </bean>
 
     <!-- Hibernate session factory -->
