@@ -50,12 +50,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="tipoRubroProducto">Tipo Rubro:</label>
                             <div class="col-sm-8">
-                                <s:select id="tipoRubroProducto"
-                                          headerKey="1"
-                                          list="#{'1':'alimentacion', '2':'cosmetica', '3':'limpieza'}"
-                                          name="tipoRubroProducto"
-                                          class="form-control"
-                                />
+                                <select id="tipoRubroProducto"
+                                        headerKey="1"
+                                        name="tipoRubroProducto"
+                                        class="form-control">
+                                    <option value="1">alimentacion</option>
+                                    <option value="2">cosmetica</option>
+                                    <option value="3">limpieza</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

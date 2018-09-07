@@ -26,6 +26,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
             criteria.add(Restrictions.eq("id", id));
+            criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
             tx.commit();
         }
@@ -49,6 +50,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
             criteria.add(Restrictions.eq("codigoBarra", codigo));
+            criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
             tx.commit();
         }
@@ -71,6 +73,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
+            criteria.add(Restrictions.eq("habilitado",true));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             tx.commit();
         }
@@ -94,6 +97,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
             criteria.add(Restrictions.eq("rubro", rubro));
+            criteria.add(Restrictions.eq("habilitado",true));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             tx.commit();
         }
@@ -122,6 +126,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             Criteria criteria = session.createCriteria(Producto.class, "producto");
             criteria.createAlias("producto.ingredientes", "ingrediente");
             criteria.add(Restrictions.in("ingrediente.nombre", ing));
+            criteria.add(Restrictions.eq("habilitado",true));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             tx.commit();
         }
@@ -163,7 +168,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         ArrayList lista;
         try {
             tx = session.beginTransaction();
-            String hql = "SELECT rubro,tipoRubro,idProducto FROM Producto GROUP BY rubro";
+            String hql = "SELECT rubro,tipoRubro,idProducto FROM Producto GROUP BY rubro ORDER BY rubro ASC";
             Query query = session.createQuery(hql);
             lista = (ArrayList) query.list();
             tx.commit();
@@ -192,14 +197,14 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             if (opcion.equals("r00")) {
                 hql = "SELECT distinct p " +
                         "FROM Producto p " +
-                        "WHERE p.rubro = :rubro";
+                        "WHERE p.rubro = :rubro AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro);
             } else if (opcion.equals("rii")) {
                 hql = "SELECT distinct p " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
                         "INNER JOIN p.extras e " +
-                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND e.idExtra IN (:extras)";
+                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND e.idExtra IN (:extras) AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes)
@@ -207,7 +212,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             } else if (opcion.equals("ri0")) {
                 hql = "SELECT distinct p " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
-                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes)";
+                        "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes);
@@ -215,22 +220,22 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
                 hql = "SELECT distinct p " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
                         "INNER JOIN p.extras e " +
-                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes) AND e.idExtra IN (:extras)";
+                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes) AND e.idExtra IN (:extras) AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes)
                         .setParameterList("extras",extras);
             } else if (opcion.equals("re0")) {
                 hql = "SELECT distinct p " +
-                        "FROM Producto p INNER JOIN p.ingredientes i " +
-                        "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes)";
+                        "FROM Producto p LEFT JOIN p.ingredientes i " +
+                        "WHERE p.rubro = :rubro AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes);
             } else if (opcion.equals("r0i")) {
                 hql = "SELECT distinct p " +
                         "FROM Producto p INNER JOIN p.extras e " +
-                        "WHERE p.rubro = :rubro AND e.idExtra IN (:extras)";
+                        "WHERE p.rubro = :rubro AND e.idExtra IN (:extras) AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("extras",extras);
@@ -248,6 +253,28 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         }
 
         return lista;
+    }
+
+    public void eliminarProducto(Integer idProducto) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        ArrayList lista;
+        try {
+            tx = session.beginTransaction();
+            String hql = "UPDATE Producto SET habilitado = false WHERE idProducto = :id";
+            Query query = session.createQuery(hql).setParameter("id",idProducto);
+            query.executeUpdate();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
     }
 
 }

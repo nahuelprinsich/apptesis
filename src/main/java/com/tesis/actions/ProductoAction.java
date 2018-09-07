@@ -38,6 +38,8 @@ public class ProductoAction extends ActionSupport {
     @Autowired
     private UsuarioService usuarioService;
 
+    private Producto productoAModificar;
+
     /* Colecciones */
     private String ingredientes;
     private String valoresEnergeticos;
@@ -55,6 +57,7 @@ public class ProductoAction extends ActionSupport {
     private String descripcionProducto;
     private String tipoRubroProducto;
     private String urlImagenProducto;
+    private Integer idProducto;
     /* Envase */
     private String descripcionEnvase;
     private String caracteristicaRetornable;
@@ -177,6 +180,7 @@ public class ProductoAction extends ActionSupport {
         producto.setDescripcion(descripcionProducto);
         producto.setTipoRubro(tipoRubroProducto);
         producto.setUrlImagen(urlImagenProducto);
+        producto.setHabilitado(true);
 
         producto.setUsuario(usuarioService.addUsuario(usuario));
         producto.setExtras(crearListaExtras());
@@ -184,8 +188,15 @@ public class ProductoAction extends ActionSupport {
         producto.setEnvase(envase);
         producto.setIngredientes(crearListaIngredientes());
 
-        productoService.addProducto(producto);
-        crearListaValoresEnergeticos(producto);
+        Producto productoExiste = productoService.getProductoByCodigo(codigoBarraProducto);
+        if(productoExiste != null){
+            producto.setIdProducto(productoExiste.getIdProducto());
+            producto.setProductoValorEnergetico(productoExiste.getProductoValorEnergetico());
+            productoService.addProducto(producto);
+        } else {
+            productoService.addProducto(producto);
+            crearListaValoresEnergeticos(producto);
+        }
 
 
         return "success";
@@ -235,6 +246,15 @@ public class ProductoAction extends ActionSupport {
             }
         }
         return lista;
+    }
+
+    public void eliminarProducto(){
+        productoService.eliminarProducto(idProducto);
+    }
+
+    public String modificarProducto(){
+        productoAModificar = productoService.getProductoById(idProducto);
+        return SUCCESS;
     }
 
     public EnvaseService getEnvaseService() {
@@ -603,5 +623,21 @@ public class ProductoAction extends ActionSupport {
 
     public void setUsuarioService(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Producto getProductoAModificar() {
+        return productoAModificar;
+    }
+
+    public void setProductoAModificar(Producto productoAModificar) {
+        this.productoAModificar = productoAModificar;
     }
 }

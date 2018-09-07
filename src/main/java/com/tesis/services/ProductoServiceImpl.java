@@ -64,6 +64,10 @@ public class ProductoServiceImpl implements ProductoService {
         return productoBO.getProductosByRuInEx(rubro,ingredientes,extras,opcion);
     }
 
+    public void eliminarProducto(Integer idProducto) {
+        productoBO.eliminarProducto(idProducto);
+    }
+
     public ProductoBO getProductoBO() {
         return productoBO;
     }

@@ -10,6 +10,18 @@
          <result name="success">/index.jsp</result>
       </action>
 
+      <action name="EliminarProducto" method="eliminarProducto"
+              class="com.tesis.actions.ProductoAction">
+         <result name="success">/index.jsp</result>
+      </action>
+
+      <action name="ModificarProducto" method="modificarProducto"
+              class="com.tesis.actions.ProductoAction">
+         <result type="json">
+            <param name="root">productoAModificar</param>
+         </result>
+      </action>
+
       <action name="BuscarIngrediente" method="buscarIngrediente"
               class="com.tesis.actions.ProductoAction">
          <result type="json"/>

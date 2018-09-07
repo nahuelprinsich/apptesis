@@ -25,4 +25,6 @@ public interface ProductoDAO extends GenericDAO<Producto> {
     public ArrayList getRubros();
 
     public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion);
+
+    public void eliminarProducto(Integer idProducto);
 }

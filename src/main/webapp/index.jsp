@@ -36,10 +36,11 @@
                                     <table id="tablaProductos" class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th class="th">Id</th>
                                             <th>Producto</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                     </table>

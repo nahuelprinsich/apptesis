@@ -5,6 +5,7 @@ import com.tesis.models.Extra;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class ExtraDAOImpl extends GenericDAOImpl<Extra> implements ExtraDAO {
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Extra.class);
+            criteria.addOrder(Order.asc("descripcion"));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             tx.commit();
         }

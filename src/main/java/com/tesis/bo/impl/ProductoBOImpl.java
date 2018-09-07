@@ -52,4 +52,8 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
     public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion) {
         return productoDAO.getProductosByRuInEx(rubro,ingredientes,extras,opcion);
     }
+
+    public void eliminarProducto(Integer idProducto) {
+        productoDAO.eliminarProducto(idProducto);
+    }
 }

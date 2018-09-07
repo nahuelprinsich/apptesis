@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+
     cargarTablas();
 
     $('#tablaIngredientes tbody').on( 'click', 'tr', function () {
@@ -16,7 +17,79 @@ $(document).ready(function() {
     $('#tablaExtras tbody').on( 'click', 'tr', function () {
         $(this).toggleClass('selected');
     } );
+
+    if(obtenerParametro() != null){
+        $.ajax({
+            type: "POST",
+            url: "ModificarProducto",
+            async: false,
+            data: {
+                idProducto: obtenerParametro()
+            },
+            success: function (data) {
+                $("#nombreProducto").val(data["nombreProducto"]);
+                $("#rubroProducto").val(data["rubro"]);
+                $("#tipoRubroProducto option:contains(" + data["tipoRubro"] + ")").attr('selected', 'selected');
+                $("#codigoBarraProducto").val(data["codigoBarra"]);
+                $("#porcionProducto").val(data["porcion"]);
+                $("#tipoPorcionProducto option:contains(" + data["tipoPorcion"] + ")").attr('selected', 'selected');
+                $("#marcaProducto").val(data["marca"]);
+                $("#contenidoNetoProducto").val(data["contenidoNeto"]);
+                $("#urlImagenProducto").val(data["urlImagen"]);
+                $("#esAlimentoProducto").val(data["esAlimento"]);
+                $("#descripcionEnvase").val(data["envase"].descripcion);
+                $("#caracteristicaRetornable option:contains(" + data["envase"].caracteristicasEnvase[2].descripcion + ")").attr('selected', 'selected');
+                $("#caracteristicaReutilizable option:contains(" + data["envase"].caracteristicasEnvase[1].descripcion + ")").attr('selected', 'selected');
+                $("#caracteristicaReciclable option:contains(" + data["envase"].caracteristicasEnvase[3].descripcion + ")").attr('selected', 'selected');
+                $("#caracteristicaCompostable option:contains(" + data["envase"].caracteristicasEnvase[0].descripcion + ")").attr('selected', 'selected');
+                $("#caracteristicaMP option:contains(" + data["envase"].caracteristicasEnvase[5].descripcion + ")").attr('selected', 'selected');
+                $("#caracteristicaCO option:contains(" + data["envase"].caracteristicasEnvase[4].descripcion + ")").attr('selected', 'selected');
+                $("#razonSocialFabricante").val(data["fabricante"].nombre);
+                $("#nombreUsuario").val(data["usuario"].nombre);
+                $("#apellidoUsuario").val(data["usuario"].apellido);
+
+                var tablaValores = $('#tablaValores').DataTable();
+                var tablaIngredientes = $('#tablaIngredientes').DataTable();
+                var tablaExtras = $('#tablaExtras').DataTable();
+
+                tablaValores.column( 0 ).data()
+                    .each( function ( value, index ) {
+                        $.each(data["productoValorEnergetico"],function (index2,valor) {
+                            if(valor.idProductoValorEnergetico == value ){
+                                $('#tablaValores').DataTable().row(index).nodes().to$().addClass( 'selected' );
+                                $('#tablaValores').DataTable().data()[index].valor = valor.valor;
+                            }
+                         });
+                    } );
+
+                tablaIngredientes.column( 0 ).data()
+                    .each( function ( value, index ) {
+                        $.each(data["ingredientes"],function (index2,valor) {
+                            if(valor.idIngrediente == value ){
+                                $('#tablaIngredientes').DataTable().row(index).nodes().to$().addClass( 'selected' );
+                            }
+                        });
+                    } );
+
+                tablaExtras.column( 0 ).data()
+                    .each( function ( value, index ) {
+                        $.each(data["extras"],function (index2,valor) {
+                            if(valor.idExtra == value ){
+                                $('#tablaExtras').DataTable().row(index).nodes().to$().addClass( 'selected' );
+                            }
+                        });
+                    } );
+
+            }
+        })
+    }
+
 } );
+
+function obtenerParametro(){
+    urlp=[];u=location.search.replace("?","").split("&").forEach(function(d){e=d.split("=");urlp[e[0]]=e[1];});
+    return urlp["id"];
+}
 
 function cargaProducto(){
     var ingredientes = "";
@@ -95,8 +168,8 @@ function cargarTablaIngredientes() {
     var resultIngredientes;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllIngredientes.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json",
+        url: "http://localhost:8080/proyecto-tesis/getAllIngredientes.json",
+        //url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json",
         dataType: "json",
         async: false,
         success : function(data) {
@@ -136,8 +209,8 @@ function cargarTablaValores() {
     var tablaValoresE;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllValoresEnergeticos.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllValoresEnergeticos.json",
+        url: "http://localhost:8080/proyecto-tesis/getAllValoresEnergeticos.json",
+        //url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllValoresEnergeticos.json",
         dataType: "json",
         async: false,
         success : function(data) {
@@ -188,8 +261,8 @@ function cargarTablaExtras() {
     var resultExtras;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllExtras.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllExtras.json",
+        url: "http://localhost:8080/proyecto-tesis/getAllExtras.json",
+        //url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllExtras.json",
         dataType: "json",
         async: false,
         success : function(data) {

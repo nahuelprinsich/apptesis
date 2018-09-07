@@ -41,6 +41,7 @@ public class Producto implements Serializable {
     private String tipoRubro;
     private String urlImagen;
     private Usuario usuario;
+    private Boolean habilitado;
 
     public Producto(){
 
@@ -196,5 +197,13 @@ public class Producto implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(Boolean habilitado) {
+        this.habilitado = habilitado;
     }
 }

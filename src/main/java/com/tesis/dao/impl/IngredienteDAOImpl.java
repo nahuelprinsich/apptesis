@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -89,6 +90,7 @@ public class IngredienteDAOImpl extends GenericDAOImpl<Ingrediente> implements I
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Ingrediente.class);
             criteria.add(Restrictions.like("tipoRubro", tipoRubro + '%'));
+            criteria.addOrder(Order.asc("nombre"));
             ingredientes = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             tx.commit();
         }
