@@ -33,8 +33,8 @@ function cargarTablaProductos() {
     var resultProductos;
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/proyecto-tesis/getAllProductos.json",
-        //url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllProductos.json",
+        //url: "http://localhost:8080/proyecto-tesis/getAllProductos.json",
+        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllProductos.json",
         dataType: "json",
         async: false,
         success : function(data) {

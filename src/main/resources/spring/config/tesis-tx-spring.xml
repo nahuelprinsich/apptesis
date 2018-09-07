@@ -15,13 +15,13 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
         <!-- Base Local -->
-        <property name="url" value="jdbc:mysql://localhost:8080/tesis" />
-        <property name="username" value="root" />
+        <!--<property name="url" value="jdbc:mysql://localhost:8080/tesis" />
+        <property name="username" value="root" />-->
 
         <!-- Base Remota -->
-        <!--<property name="url" value="jdbc:mysql://nahuelp.heliohost.org:8080/nahuelp_tesisNueva" />
+        <property name="url" value="jdbc:mysql://nahuelp.heliohost.org:8080/nahuelp_tesisNueva" />
         <property name="username" value="nahuelp_root" />
-        <property name="password" value="rootnahuel" />-->
+        <property name="password" value="rootnahuel" />
 
         <!-- Base Remota -->
         <!--<property name="url" value="jdbc:mysql://sql135.main-hosting.eu.:8080/u745867915_tesis" />
