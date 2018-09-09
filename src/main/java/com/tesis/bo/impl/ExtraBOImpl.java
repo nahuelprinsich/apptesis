@@ -4,6 +4,7 @@ import com.tesis.bo.ExtraBO;
 import com.tesis.dao.ExtraDAO;
 import com.tesis.models.Extra;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class ExtraBOImpl extends GenericBOImpl<Extra> implements ExtraBO {
         return extraDAO.addExtra(extra);
     }
 
-    public List<Extra> getAllExtras() {
+    public ArrayList getAllExtras() {
         return extraDAO.getAllExtras();
     }
 }

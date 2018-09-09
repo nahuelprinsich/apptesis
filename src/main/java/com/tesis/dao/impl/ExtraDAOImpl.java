@@ -3,10 +3,12 @@ package com.tesis.dao.impl;
 import com.tesis.dao.ExtraDAO;
 import com.tesis.models.Extra;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +36,9 @@ public class ExtraDAOImpl extends GenericDAOImpl<Extra> implements ExtraDAO {
         return extra;
     }
 
-    public List<Extra> getAllExtras() {
+    public ArrayList getAllExtras() {
 
-        Session session = this.getSessionFactory().openSession();
+        /*Session session = this.getSessionFactory().openSession();
         Transaction tx = null;
         List<Extra> lista;
         try {
@@ -51,6 +53,25 @@ public class ExtraDAOImpl extends GenericDAOImpl<Extra> implements ExtraDAO {
             throw e;
         }
         finally {
+            session.close();
+        }
+
+        return lista;
+    }*/
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        ArrayList lista;
+        try {
+            tx = session.beginTransaction();
+            String hql = "SELECT idExtra, descripcion, urlLogo FROM Extra GROUP BY descripcion ORDER BY descripcion ASC";
+            Query query = session.createQuery(hql);
+            lista = (ArrayList) query.list();
+            tx.commit();
+        } catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        } finally {
             session.close();
         }
 

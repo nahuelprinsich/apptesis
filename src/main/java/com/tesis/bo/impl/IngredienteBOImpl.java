@@ -5,6 +5,7 @@ import com.tesis.dao.IngredienteDAO;
 import com.tesis.models.Ingrediente;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class IngredienteBOImpl extends GenericBOImpl<Ingrediente> implements Ing
         return ingredienteDAO.getIngredienteByName(nombreIngrediente);
     }
 
-    public List<Ingrediente> getIngredientesByTipoRubro(String tipoRubro) {
+    public ArrayList getIngredientesByTipoRubro(String tipoRubro) {
         return ingredienteDAO.getIngredientesByTipoRubro(tipoRubro);
     }
 }

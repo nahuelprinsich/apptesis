@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,9 +82,9 @@ public class IngredienteDAOImpl extends GenericDAOImpl<Ingrediente> implements I
         return ingredientes;
     }
 
-    public List<Ingrediente> getIngredientesByTipoRubro(String tipoRubro) {
+    public ArrayList getIngredientesByTipoRubro(String tipoRubro) {
 
-        Session session = getSessionFactory().openSession();
+        /*Session session = getSessionFactory().openSession();
         Transaction tx = null;
         List<Ingrediente> ingredientes;
         try {
@@ -102,6 +103,26 @@ public class IngredienteDAOImpl extends GenericDAOImpl<Ingrediente> implements I
             session.close();
         }
 
-        return ingredientes;
+        return ingredientes;*/
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        ArrayList lista;
+        try {
+            tx = session.beginTransaction();
+            String hql = "SELECT idIngrediente, nombre FROM Ingrediente WHERE tipoRubro = :tipoR GROUP BY nombre ORDER BY nombre ASC";
+            Query query = session.createQuery(hql).setParameter("tipoR", tipoRubro);
+            lista = (ArrayList) query.list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
+        return lista;
     }
 }

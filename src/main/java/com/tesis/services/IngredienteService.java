@@ -2,6 +2,7 @@ package com.tesis.services;
 
 import com.tesis.models.Ingrediente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ public interface IngredienteService {
 
     public List<Ingrediente> getIngredienteByName(String nombreIngrediente);
 
-    public List<Ingrediente> getIngredientesByTipoRubro(String tipoRubro);
+    public ArrayList getIngredientesByTipoRubro(String tipoRubro);
 }

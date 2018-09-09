@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -34,7 +35,7 @@ public class IngredienteServiceImpl implements IngredienteService {
     }
 
     @RequestMapping(value = "/getIngredientesByTipoRubro", method = GET)
-    public List<Ingrediente> getIngredientesByTipoRubro(@RequestParam(value="tipoRubro") String tipoRubro) {
+    public ArrayList getIngredientesByTipoRubro(@RequestParam(value="tipoRubro") String tipoRubro) {
         return ingredienteBO.getIngredientesByTipoRubro(tipoRubro);
     }
 

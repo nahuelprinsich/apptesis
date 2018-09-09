@@ -2,6 +2,7 @@ package com.tesis.bo;
 
 import com.tesis.models.Extra;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,5 +12,5 @@ public interface ExtraBO extends GenericBO<Extra> {
 
     public Extra addExtra(Extra extra);
 
-    public List<Extra> getAllExtras();
+    public ArrayList getAllExtras();
 }

@@ -2,6 +2,7 @@ package com.tesis.dao;
 
 import com.tesis.models.Ingrediente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ public interface IngredienteDAO extends GenericDAO<Ingrediente> {
 
     public List<Ingrediente> getIngredienteByName(String nombreIngrediente);
 
-    public List<Ingrediente> getIngredientesByTipoRubro(String tipoRubro);
+    public ArrayList getIngredientesByTipoRubro(String tipoRubro);
 }
