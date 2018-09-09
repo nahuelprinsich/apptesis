@@ -191,7 +191,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         List<Producto> lista;
         String hql;
         Query query = null;
-        rubro = rubro.replace("*"," ");
+        rubro = rubro.replace("_"," ");
 
         try {
             tx = session.beginTransaction();
