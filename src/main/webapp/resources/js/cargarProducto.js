@@ -261,7 +261,7 @@ function cargarTablaExtras() {
     var resultExtras;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllExtras.json",
+        //url: "http://localhost:8080/proyecto-tesis/getAllExtrasTabla.json",
         url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllExtras.json",
         dataType: "json",
         async: false,

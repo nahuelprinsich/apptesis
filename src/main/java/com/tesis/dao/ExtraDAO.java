@@ -13,4 +13,6 @@ public interface ExtraDAO extends GenericDAO<Extra> {
     public Extra addExtra(Extra extra);
 
     public ArrayList getAllExtras();
+
+    public List<Extra> getAllExtrasTabla();
 }

@@ -38,27 +38,6 @@ public class ExtraDAOImpl extends GenericDAOImpl<Extra> implements ExtraDAO {
 
     public ArrayList getAllExtras() {
 
-        /*Session session = this.getSessionFactory().openSession();
-        Transaction tx = null;
-        List<Extra> lista;
-        try {
-            tx = session.beginTransaction();
-            Criteria criteria = session.createCriteria(Extra.class);
-            criteria.addOrder(Order.asc("descripcion"));
-            lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-            tx.commit();
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        }
-        finally {
-            session.close();
-        }
-
-        return lista;
-    }*/
-
         Session session = this.getSessionFactory().openSession();
         Transaction tx = null;
         ArrayList lista;
@@ -75,6 +54,29 @@ public class ExtraDAOImpl extends GenericDAOImpl<Extra> implements ExtraDAO {
             session.close();
         }
 
+        return lista;
+    }
+
+    public List<Extra> getAllExtrasTabla(){
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        List<Extra> lista;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Extra.class);
+            criteria.addOrder(Order.asc("descripcion"));
+            System.out.println("Se consulta a la base");
+            lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+        System.out.println("Se retorna el resultado");
         return lista;
     }
 }

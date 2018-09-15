@@ -36,4 +36,9 @@ public class ExtraServiceImpl implements ExtraService {
     public ArrayList getAllExtras() {
         return extraBO.getAllExtras();
     }
+
+    @RequestMapping(value = "/getAllExtrasTabla", method = GET)
+    public List<Extra> getAllExtrasTabla() {
+        return extraBO.getAllExtrasTabla();
+    }
 }

@@ -29,4 +29,8 @@ public class ExtraBOImpl extends GenericBOImpl<Extra> implements ExtraBO {
     public ArrayList getAllExtras() {
         return extraDAO.getAllExtras();
     }
+
+    public List<Extra> getAllExtrasTabla() {
+        return extraDAO.getAllExtrasTabla();
+    }
 }
