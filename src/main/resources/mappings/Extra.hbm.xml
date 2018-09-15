@@ -10,7 +10,7 @@
         <property name="descripcion" column="descripcion" type="string" />
         <property name="urlLogo" column="urlLogo" type="string" />
         <property name="tipoRubro" column="tipoRubro" />
-        <set name="productos" table="producto_extra" fetch="join" lazy="false">
+        <set name="productos" table="producto_extra">
             <key column="Extra_idExtra"/>
             <many-to-many column="Producto_idProducto" class="Producto"/>
         </set>

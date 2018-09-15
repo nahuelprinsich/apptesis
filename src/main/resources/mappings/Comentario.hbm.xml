@@ -9,6 +9,6 @@
         </id>
         <property name="descripcion" column="descripcion" type="string" />
         <property name="puntaje" column="puntaje" />
-        <many-to-one name="producto" column="Producto_idProducto" class="Producto" lazy="false"/>
+        <many-to-one name="producto" column="Producto_idProducto" class="Producto"/>
     </class>
 </hibernate-mapping>

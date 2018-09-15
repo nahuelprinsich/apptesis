@@ -10,7 +10,7 @@
         <property name="categoria" column="categoria" />
         <property name="descripcion" column="descripcion" />
         <property name="valor" column="valor" />
-        <set name="envases" table="envase_caracteristicaenvase" fetch="join" lazy="false">
+        <set name="envases" table="envase_caracteristicaenvase">
             <key column="CaracteristicaEnvase_idCaracteristicaEnvase"/>
             <many-to-many column="Envase_idEnvase" class="Envase"/>
         </set>

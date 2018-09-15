@@ -12,7 +12,7 @@
         <property name="conAdvertencia" column="conAdvertencia" />
         <property name="tipoRubro" column="tipoRubro" />
         <property name="linkInformacionExtra" column="linkInformacionExtra" />
-        <set name="productos" table="producto_ingrediente" fetch="join" lazy="false">
+        <set name="productos" table="producto_ingrediente">
             <key column="Ingrediente_idIngrediente"/>
             <many-to-many column="Producto_idProducto" class="Producto"/>
         </set>
