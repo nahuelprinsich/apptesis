@@ -2,10 +2,7 @@ package com.tesis.dao.impl;
 
 import com.tesis.dao.ProductoDAO;
 import com.tesis.models.Producto;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 

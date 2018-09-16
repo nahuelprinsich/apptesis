@@ -8,7 +8,7 @@
             <generator class="native" ></generator>
         </id>
         <property name="valor" column="valor" />
-        <many-to-one name="valorEnergetico" column="ValorEnergetico_idValorEnergetico" class="ValorEnergetico"/>
+        <many-to-one name="valorEnergetico" column="ValorEnergetico_idValorEnergetico" class="ValorEnergetico" lazy="false"/>
         <many-to-one name="producto" column="Producto_idProducto" class="Producto"/>
     </class>
 </hibernate-mapping>
