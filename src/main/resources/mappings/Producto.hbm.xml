@@ -22,20 +22,20 @@
         <many-to-one name="envase" column="Envase_idEnvase" class="Envase" lazy="false"/>
         <many-to-one name="fabricante" column="Fabricante_idFabricante" class="Fabricante" lazy="false"/>
         <many-to-one name="usuario" column="Usuario_idUsuario" class="Usuario" lazy="false"/>
-        <set name="comentarios" table="comentario" lazy="false">
+        <set name="comentarios" table="comentario">
             <key column="idComentario"/>
             <one-to-many class="Comentario"/>
         </set>
-        <set name="extras" table="producto_extra" lazy="false">
+        <set name="extras" table="producto_extra">
             <key column="Producto_idProducto"/>
             <many-to-many column="Extra_idExtra" class="Extra"/>
         </set>
-        <set name="ingredientes" table="producto_ingrediente" lazy="false">
+        <set name="ingredientes" table="producto_ingrediente">
             <key column="Producto_idProducto"/>
             <many-to-many column="Ingrediente_idIngrediente" class="Ingrediente"/>
         </set>
 
-        <set name="productoValorEnergetico" table="productovalorenergetico" lazy="false">
+        <set name="productoValorEnergetico" table="productovalorenergetico">
             <key>
                 <column name="Producto_idProducto" />
             </key>

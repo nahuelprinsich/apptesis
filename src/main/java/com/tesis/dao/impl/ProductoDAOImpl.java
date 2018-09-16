@@ -49,6 +49,13 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             criteria.add(Restrictions.eq("codigoBarra", codigo));
             criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
+            System.out.println(producto.getFabricante().toString());
+            System.out.println(producto.getUsuario().toString());
+            System.out.println(producto.getComentarios().toString());
+            System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
+            System.out.println(producto.getExtras().toString());
+            System.out.println(producto.getIngredientes().toString());
+            System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
             tx.commit();
         }
         catch (RuntimeException e) {
@@ -72,6 +79,15 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             Criteria criteria = session.createCriteria(Producto.class);
             criteria.add(Restrictions.eq("habilitado",true));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            for(Producto producto : lista){
+                System.out.println(producto.getFabricante().toString());
+                System.out.println(producto.getUsuario().toString());
+                System.out.println(producto.getComentarios().toString());
+                System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
+                System.out.println(producto.getExtras().toString());
+                System.out.println(producto.getIngredientes().toString());
+                System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
+            }
             tx.commit();
         }
         catch (RuntimeException e) {
