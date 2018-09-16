@@ -83,10 +83,14 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
                 System.out.println(producto.getFabricante().toString());
                 System.out.println(producto.getUsuario().toString());
                 System.out.println(producto.getComentarios().toString());
-                System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
+                if(producto.getEnvase().getCaracteristicasEnvase().iterator().hasNext()){
+                    System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
+                }
                 System.out.println(producto.getExtras().toString());
                 System.out.println(producto.getIngredientes().toString());
-                System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
+                if(producto.getProductoValorEnergetico().iterator().hasNext()){
+                    System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
+                }
             }
             tx.commit();
         }
