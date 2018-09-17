@@ -216,13 +216,13 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         try {
             tx = session.beginTransaction();
             if (opcion.equals("r00")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p " +
                         "WHERE p.rubro = :rubro AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro);
             } else if (opcion.equals("rii")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
                         "INNER JOIN p.extras e " +
                         "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND e.idExtra IN (:extras) AND p.habilitado = true";
@@ -231,14 +231,14 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
                         .setParameterList("ingredientes",ingredientes)
                         .setParameterList("extras",extras);
             } else if (opcion.equals("ri0")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
                         "WHERE p.rubro = :rubro AND i.idIngrediente IN (:ingredientes) AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro)
                         .setParameterList("ingredientes",ingredientes);
             } else if (opcion.equals("rei")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p INNER JOIN p.ingredientes i " +
                         "INNER JOIN p.extras e " +
                         "WHERE p.rubro = :rubro AND i.idIngrediente NOT IN (:ingredientes) AND e.idExtra IN (:extras) AND p.habilitado = true";
@@ -247,13 +247,13 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
                         .setParameterList("ingredientes",ingredientes)
                         .setParameterList("extras",extras);
             } else if (opcion.equals("re0")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p LEFT JOIN p.ingredientes i " +
                         "WHERE p.rubro = :rubro AND p.habilitado = true";
                 query = session.createQuery(hql)
                         .setParameter("rubro",rubro);
             } else if (opcion.equals("r0i")) {
-                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto " +
+                hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p INNER JOIN p.extras e " +
                         "WHERE p.rubro = :rubro AND e.idExtra IN (:extras) AND p.habilitado = true";
                 query = session.createQuery(hql)
