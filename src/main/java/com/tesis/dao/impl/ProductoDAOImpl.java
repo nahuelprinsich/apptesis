@@ -33,6 +33,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
             criteria.add(Restrictions.eq("id", id));
             criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
+            Hibernate.initialize(producto.getEnvase().getCaracteristicasEnvase().iterator().next().getEnvases());
             tx.commit();
         }
         catch (RuntimeException e) {
