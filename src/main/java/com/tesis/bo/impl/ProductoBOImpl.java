@@ -49,7 +49,7 @@ public class ProductoBOImpl extends GenericBOImpl<Producto> implements ProductoB
         return productoDAO.getRubros();
     }
 
-    public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion) {
+    public ArrayList getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion) {
         return productoDAO.getProductosByRuInEx(rubro,ingredientes,extras,opcion);
     }
 

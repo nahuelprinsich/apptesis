@@ -24,7 +24,7 @@ public interface ProductoService {
 
     public ArrayList getRubros();
 
-    public List<Producto> getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion);
+    public ArrayList getProductosByRuInEx(String rubro, List<Integer> ingredientes, List<Integer> extras, String opcion);
 
     public void eliminarProducto(Integer idProducto);
 }

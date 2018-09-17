@@ -57,7 +57,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @RequestMapping(value = "/getProductosByRuInEx", method = GET)
-    public List<Producto> getProductosByRuInEx(@RequestParam(value="rubro")String rubro,
+    public ArrayList getProductosByRuInEx(@RequestParam(value="rubro")String rubro,
                                               @RequestParam(value="ingrediente") List<Integer> ingredientes,
                                               @RequestParam(value="extra") List<Integer> extras,
                                               @RequestParam(value="opcion") String opcion) {
