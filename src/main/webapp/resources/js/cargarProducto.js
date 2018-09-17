@@ -21,11 +21,14 @@ $(document).ready(function() {
     if(obtenerParametro() != null){
         $.ajax({
             type: "GET",
-            url: "ModificarProducto",
+            //url: "ModificarProducto",
+            //url: "http://localhost:8080/proyecto-tesis/getProductoById.json?id=" + obtenerParametro(),
+            url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getProductoById.json?id=" + obtenerParametro(),
+            dataType: "json",
             async: false,
-            data: {
+            /*data: {
                 idProducto: obtenerParametro()
-            },
+            },*/
             success: function (data) {
                 $("#nombreProducto").val(data["nombreProducto"]);
                 $("#rubroProducto").val(data["rubro"]);
