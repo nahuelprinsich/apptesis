@@ -6,6 +6,7 @@ import org.hibernate.*;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,13 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
+            criteria.setFetchMode("envase",FetchMode.JOIN);
+            criteria.setFetchMode("fabricante",FetchMode.JOIN);
+            criteria.setFetchMode("usuario",FetchMode.JOIN);
+            criteria.setFetchMode("comentarios",FetchMode.JOIN);
+            criteria.setFetchMode("extras",FetchMode.JOIN);
+            criteria.setFetchMode("ingredientes",FetchMode.JOIN);
+            criteria.setFetchMode("productoValorEnergetico",FetchMode.JOIN);
             criteria.add(Restrictions.eq("id", id));
             criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
@@ -46,16 +54,16 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
+            criteria.setFetchMode("envase",FetchMode.JOIN);
+            criteria.setFetchMode("fabricante",FetchMode.JOIN);
+            criteria.setFetchMode("usuario",FetchMode.JOIN);
+            criteria.setFetchMode("comentarios",FetchMode.JOIN);
+            criteria.setFetchMode("extras",FetchMode.JOIN);
+            criteria.setFetchMode("ingredientes",FetchMode.JOIN);
+            criteria.setFetchMode("productoValorEnergetico",FetchMode.JOIN);
             criteria.add(Restrictions.eq("codigoBarra", codigo));
             criteria.add(Restrictions.eq("habilitado",true));
             producto = (Producto) criteria.uniqueResult();
-            System.out.println(producto.getFabricante().toString());
-            System.out.println(producto.getUsuario().toString());
-            System.out.println(producto.getComentarios().toString());
-            System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
-            System.out.println(producto.getExtras().toString());
-            System.out.println(producto.getIngredientes().toString());
-            System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
             tx.commit();
         }
         catch (RuntimeException e) {
@@ -77,21 +85,15 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Producto.class);
+            criteria.setFetchMode("envase",FetchMode.JOIN);
+            criteria.setFetchMode("fabricante",FetchMode.JOIN);
+            criteria.setFetchMode("usuario",FetchMode.JOIN);
+            criteria.setFetchMode("comentarios",FetchMode.JOIN);
+            criteria.setFetchMode("extras",FetchMode.JOIN);
+            criteria.setFetchMode("ingredientes",FetchMode.JOIN);
+            criteria.setFetchMode("productoValorEnergetico",FetchMode.JOIN);
             criteria.add(Restrictions.eq("habilitado",true));
             lista = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-            for(Producto producto : lista){
-                System.out.println(producto.getFabricante().toString());
-                System.out.println(producto.getUsuario().toString());
-                System.out.println(producto.getComentarios().toString());
-                if(producto.getEnvase().getCaracteristicasEnvase().iterator().hasNext()){
-                    System.out.println(producto.getEnvase().getCaracteristicasEnvase().iterator().next().toString());
-                }
-                System.out.println(producto.getExtras().toString());
-                System.out.println(producto.getIngredientes().toString());
-                if(producto.getProductoValorEnergetico().iterator().hasNext()){
-                    System.out.println(producto.getProductoValorEnergetico().iterator().next().toString());
-                }
-            }
             tx.commit();
         }
         catch (RuntimeException e) {

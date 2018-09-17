@@ -9,7 +9,7 @@
         </id>
         <property name="descripcion" column="descripcion" />
         <property name="urlImagen" column="urlImagen" />
-        <set name="caracteristicasEnvase" table="envase_caracteristicaenvase">
+        <set name="caracteristicasEnvase" table="envase_caracteristicaenvase" lazy="false">
             <key column="Envase_idEnvase"/>
             <many-to-many column="CaracteristicaEnvase_idCaracteristicaEnvase" class="CaracteristicaEnvase"/>
         </set>

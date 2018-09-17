@@ -19,9 +19,9 @@
         <property name="tipoRubro" column="tipoRubro" />
         <property name="urlImagen" column="urlImagen" />
         <property name="habilitado" column="habilitado" />
-        <many-to-one name="envase" column="Envase_idEnvase" class="Envase" lazy="false"/>
-        <many-to-one name="fabricante" column="Fabricante_idFabricante" class="Fabricante" lazy="false"/>
-        <many-to-one name="usuario" column="Usuario_idUsuario" class="Usuario" lazy="false"/>
+        <many-to-one name="envase" column="Envase_idEnvase" class="Envase"/>
+        <many-to-one name="fabricante" column="Fabricante_idFabricante" class="Fabricante"/>
+        <many-to-one name="usuario" column="Usuario_idUsuario" class="Usuario"/>
         <set name="comentarios" table="comentario">
             <key column="idComentario"/>
             <one-to-many class="Comentario"/>

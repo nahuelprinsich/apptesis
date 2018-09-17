@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     if(obtenerParametro() != null){
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "ModificarProducto",
             async: false,
             data: {
