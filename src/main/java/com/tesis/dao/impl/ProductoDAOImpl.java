@@ -251,7 +251,7 @@ public class ProductoDAOImpl extends GenericDAOImpl<Producto> implements Product
                 hql = "SELECT distinct p.codigoBarra, p.rubro, p.tipoRubro, p.urlImagen, p.contenidoNeto, p.nombreProducto, p.marca " +
                         "FROM Producto p " +
                         "WHERE p.rubro = :rubro AND p.habilitado = true AND p.idProducto NOT IN " +
-                        "(SELECT p1.idProducto FROM Producto p1 INNER JOIN p1.ingredientes i WHERE i.idIngrediente NOT IN (:ingredientes))";
+                        "(SELECT p1.idProducto FROM Producto p1 INNER JOIN p1.ingredientes i WHERE i.idIngrediente IN (:ingredientes))";
                 query = session.createQuery(hql)
                         .setParameterList("ingredientes",ingredientes)
                         .setParameter("rubro",rubro);
