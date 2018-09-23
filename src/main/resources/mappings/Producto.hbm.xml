@@ -35,7 +35,7 @@
             <many-to-many column="Ingrediente_idIngrediente" class="Ingrediente"/>
         </set>
 
-        <set name="productoValorEnergetico" table="productovalorenergetico">
+        <set name="productoValorEnergetico" table="productovalorenergetico" inverse="true">
             <key>
                 <column name="Producto_idProducto" />
             </key>

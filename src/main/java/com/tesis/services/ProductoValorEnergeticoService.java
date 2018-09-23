@@ -8,4 +8,5 @@ import com.tesis.models.ProductoValorEnergetico;
 public interface ProductoValorEnergeticoService {
 
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
 }

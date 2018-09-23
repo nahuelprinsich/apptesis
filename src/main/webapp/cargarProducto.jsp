@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="porcionProducto">Porcion:</label>
                             <div class="col-sm-8">
-                                <s:textfield type="number" name="porcionProducto" id="porcionProducto" class="form-control" placeholder="300, 13, .." ></s:textfield>
+                                <s:textfield type="number" step=".01" name="porcionProducto" id="porcionProducto" class="form-control" placeholder="300, 13, .." ></s:textfield>
                             </div>
                         </div>
                         <div class="form-group">
@@ -306,7 +306,7 @@
                     <div class="col-md-8 offset-md-2">
                         <div class="form-group">
                             <div class="col-md-1">
-                                <s:submit type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
+                                <s:submit id="botonCargar" type="button" value="Cargar" onclick="cargaProducto()" class="btn btn-default"/>
                             </div>
                         </div>
                     </div>

@@ -25,4 +25,8 @@ public class ProductoValorEnergeticoServiceImpl implements ProductoValorEnergeti
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
         return this.productoValorEnergeticoBO.addProductoValorEnergetico(productoValorEnergetico);
     }
+
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
+        this.productoValorEnergeticoBO.borrarProductoValorEnergetico(productoValorEnergetico);
+    }
 }

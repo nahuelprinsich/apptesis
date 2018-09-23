@@ -36,13 +36,42 @@ $(document).ready(function() {
                 $("#contenidoNetoProducto").val(data["contenidoNeto"]);
                 $("#urlImagenProducto").val(data["urlImagen"]);
                 $("#esAlimentoProducto").val(data["esAlimento"]);
+                if(data["esAlimento"]){
+                    $("#esAlimentoProducto").prop('checked',true);
+                }
                 $("#descripcionEnvase").val(data["envase"].descripcion);
-                $("#caracteristicaRetornable option:contains(" + data["envase"].caracteristicasEnvase[2].descripcion + ")").attr('selected', 'selected');
-                $("#caracteristicaReutilizable option:contains(" + data["envase"].caracteristicasEnvase[1].descripcion + ")").attr('selected', 'selected');
-                $("#caracteristicaReciclable option:contains(" + data["envase"].caracteristicasEnvase[3].descripcion + ")").attr('selected', 'selected');
-                $("#caracteristicaCompostable option:contains(" + data["envase"].caracteristicasEnvase[0].descripcion + ")").attr('selected', 'selected');
-                $("#caracteristicaMP option:contains(" + data["envase"].caracteristicasEnvase[5].descripcion + ")").attr('selected', 'selected');
-                $("#caracteristicaCO option:contains(" + data["envase"].caracteristicasEnvase[4].descripcion + ")").attr('selected', 'selected');
+                for(i = 0;i < data["envase"].caracteristicasEnvase.length; i++){
+                    $("#caracteristicaRetornable > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaRetornable").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                    $("#caracteristicaReutilizable > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaReutilizable").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                    $("#caracteristicaReciclable > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaReciclable").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                    $("#caracteristicaCompostable > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaCompostable").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                    $("#caracteristicaMP > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaMP").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                    $("#caracteristicaCO > option").each(function() {
+                        if(this.value == data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase){
+                            $("#caracteristicaCO").val(data["envase"].caracteristicasEnvase[i].idCaracteristicaEnvase);
+                        }
+                    });
+                }
                 $("#razonSocialFabricante").val(data["fabricante"].nombre);
                 $("#nombreUsuario").val(data["usuario"].nombre);
                 $("#apellidoUsuario").val(data["usuario"].apellido);
@@ -54,7 +83,7 @@ $(document).ready(function() {
                 tablaValores.column( 0 ).data()
                     .each( function ( value, index ) {
                         $.each(data["productoValorEnergetico"],function (index2,valor) {
-                            if(valor.idProductoValorEnergetico == value ){
+                            if(valor.valorEnergetico.idValorEnergetico == value ){
                                 $('#tablaValores').DataTable().row(index).nodes().to$().addClass( 'selected' );
                                 $('#tablaValores').DataTable().data()[index].valor = valor.valor;
                             }
@@ -83,6 +112,7 @@ $(document).ready(function() {
         })
     }
 
+    $('#botonCargar').text('Modificar');
 } );
 
 function obtenerParametro(){

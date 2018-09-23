@@ -49,7 +49,7 @@ public class ProductoAction extends ActionSupport {
     private String nombreProducto;
     private String rubroProducto;
     private String codigoBarraProducto;
-    private Float porcionProducto;
+    private float porcionProducto;
     private String tipoPorcionProducto;
     private String marcaProducto;
     private String contenidoNetoProducto;
@@ -136,7 +136,6 @@ public class ProductoAction extends ActionSupport {
         usuario.setNombre(nombreUsuario);
         usuario.setApellido(apellidoUsuario);
 
-        List<CaracteristicaEnvase> listaCaracteristicas = caracteristicaEnvaseService.getAllCaracteristicas();
         HashSet<CaracteristicaEnvase> hashSetCaracteristicas = new HashSet<CaracteristicaEnvase>();
         CaracteristicaEnvase caracteristicaEnvase = new CaracteristicaEnvase();
         caracteristicaEnvase.setIdCaracteristicaEnvase(Integer.valueOf(caracteristicaRetornable));
@@ -165,8 +164,6 @@ public class ProductoAction extends ActionSupport {
         Envase envase = new Envase();
         envase.setDescripcion(descripcionEnvase);
         envase.setCaracteristicasEnvase(hashSetCaracteristicas);
-        HashSet<Envase> hashSetEnvase = new HashSet<Envase>();
-        hashSetEnvase.add(envaseService.addEnvase(envase));
 
         Producto producto = new Producto();
         producto.setNombreProducto(nombreProducto);
@@ -182,24 +179,42 @@ public class ProductoAction extends ActionSupport {
         producto.setUrlImagen(urlImagenProducto);
         producto.setHabilitado(true);
 
-        producto.setUsuario(usuarioService.addUsuario(usuario));
-        producto.setExtras(crearListaExtras());
-        producto.setFabricante(fabricanteService.addFabricante(fabricante));
-        producto.setEnvase(envase);
-        producto.setIngredientes(crearListaIngredientes());
-
         Producto productoExiste = productoService.getProductoByCodigo(codigoBarraProducto);
         if(productoExiste != null){
             producto.setIdProducto(productoExiste.getIdProducto());
-            producto.setProductoValorEnergetico(productoExiste.getProductoValorEnergetico());
+            usuario.setIdUsuario(productoExiste.getUsuario().getIdUsuario());
+            producto.setUsuario(usuarioService.addUsuario(usuario));
+            fabricante.setIdFabricante(productoExiste.getFabricante().getIdFabricante());
+            producto.setFabricante(fabricanteService.addFabricante(fabricante));
+            envase.setIdEnvase(productoExiste.getEnvase().getIdEnvase());
+            producto.setEnvase(envaseService.addEnvase(envase));
+
+            producto.setExtras(crearListaExtras());
+            producto.setIngredientes(crearListaIngredientes());
+            producto.setProductoValorEnergetico(null);
+
+            borrarProductoValorEnergeticos(productoExiste.getProductoValorEnergetico());
             productoService.addProducto(producto);
+            crearListaValoresEnergeticos(producto);
         } else {
+            producto.setUsuario(usuarioService.addUsuario(usuario));
+            producto.setExtras(crearListaExtras());
+            producto.setFabricante(fabricanteService.addFabricante(fabricante));
+            producto.setEnvase(envaseService.addEnvase(envase));
+            producto.setIngredientes(crearListaIngredientes());
+
             productoService.addProducto(producto);
             crearListaValoresEnergeticos(producto);
         }
 
 
         return "success";
+    }
+
+    public void borrarProductoValorEnergeticos(Set<ProductoValorEnergetico> productoValorEnergeticos){
+        for(ProductoValorEnergetico productoValorEnergetico : productoValorEnergeticos){
+            productoValorEnergeticoService.borrarProductoValorEnergetico(productoValorEnergetico);
+        }
     }
 
     public Set<Ingrediente> crearListaIngredientes(){
@@ -235,6 +250,26 @@ public class ProductoAction extends ActionSupport {
         return lista;
     }
 
+    public Set<ProductoValorEnergetico> modificarListaValoresEnergeticos(Set<ProductoValorEnergetico> productoValorEnergeticos){
+        Set<ProductoValorEnergetico> lista = new HashSet<ProductoValorEnergetico>();
+        if(!("").equals(valoresEnergeticos)){
+            String[] arregloValoresEnergeticos = this.valoresEnergeticos.split("&");
+            for(String propiedad : arregloValoresEnergeticos){
+                String[] stringPropiedades = propiedad.split("-");
+                ValorEnergetico valorEnergetico = new ValorEnergetico();
+                valorEnergetico.setIdValorEnergetico(Integer.valueOf(stringPropiedades[0]));
+
+                for(ProductoValorEnergetico productoValorEnergetico : productoValorEnergeticos){
+                    if(productoValorEnergetico.getValorEnergetico().getIdValorEnergetico() == valorEnergetico.getIdValorEnergetico()){
+                        productoValorEnergetico.setValor(Float.valueOf(stringPropiedades[1]));
+                        lista.add(productoValorEnergeticoService.addProductoValorEnergetico(productoValorEnergetico));
+                    }
+                }
+            }
+        }
+        return lista;
+    }
+
     public Set<Extra> crearListaExtras(){
         Set<Extra> lista = new HashSet<Extra>();
         if(!("").equals(informaciones)){
@@ -250,11 +285,6 @@ public class ProductoAction extends ActionSupport {
 
     public void eliminarProducto(){
         productoService.eliminarProducto(idProducto);
-    }
-
-    public String modificarProducto(){
-        productoAModificar = productoService.getProductoById(idProducto);
-        return SUCCESS;
     }
 
     public EnvaseService getEnvaseService() {
@@ -353,11 +383,11 @@ public class ProductoAction extends ActionSupport {
         this.codigoBarraProducto = codigoBarraProducto;
     }
 
-    public Float getPorcionProducto() {
+    public float getPorcionProducto() {
         return porcionProducto;
     }
 
-    public void setPorcionProducto(Float porcionProducto) {
+    public void setPorcionProducto(float porcionProducto) {
         this.porcionProducto = porcionProducto;
     }
 

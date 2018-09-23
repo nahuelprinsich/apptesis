@@ -8,4 +8,5 @@ import com.tesis.models.ProductoValorEnergetico;
 public interface ProductoValorEnergeticoBO extends GenericBO<ProductoValorEnergetico> {
 
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
 }

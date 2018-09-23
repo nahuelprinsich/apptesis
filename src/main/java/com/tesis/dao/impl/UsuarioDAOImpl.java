@@ -15,7 +15,7 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(usuario);
+            session.saveOrUpdate(usuario);
             tx.commit();
         }
         catch (RuntimeException e) {

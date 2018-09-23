@@ -23,4 +23,8 @@ public class ProductoValorEnergeticoBOImpl extends GenericBOImpl<ProductoValorEn
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
         return  this.productoValorEnergeticoDAO.addProductoValorEnergetico(productoValorEnergetico);
     }
+
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
+        this.productoValorEnergeticoDAO.borrarProductoValorEnergetico(productoValorEnergetico);
+    }
 }

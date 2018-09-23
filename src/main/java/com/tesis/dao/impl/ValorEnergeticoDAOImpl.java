@@ -19,7 +19,7 @@ public class ValorEnergeticoDAOImpl extends GenericDAOImpl<ValorEnergetico> impl
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(valorEnergetico);
+            session.saveOrUpdate(valorEnergetico);
             tx.commit();
         }
         catch (RuntimeException e) {

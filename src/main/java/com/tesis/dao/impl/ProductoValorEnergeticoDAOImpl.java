@@ -17,7 +17,7 @@ public class ProductoValorEnergeticoDAOImpl extends GenericDAOImpl<ProductoValor
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(productoValorEnergetico);
+            session.saveOrUpdate(productoValorEnergetico);
             tx.commit();
         }
         catch (RuntimeException e) {
@@ -29,5 +29,24 @@ public class ProductoValorEnergeticoDAOImpl extends GenericDAOImpl<ProductoValor
         }
 
         return productoValorEnergetico;
+    }
+
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico) {
+
+        Session session = this.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(productoValorEnergetico);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+
     }
 }

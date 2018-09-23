@@ -8,4 +8,6 @@ import com.tesis.models.ProductoValorEnergetico;
 public interface ProductoValorEnergeticoDAO extends GenericDAO<ProductoValorEnergetico> {
 
     public ProductoValorEnergetico addProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
+    public void borrarProductoValorEnergetico(ProductoValorEnergetico productoValorEnergetico);
+
 }

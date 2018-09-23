@@ -16,7 +16,7 @@ public class FabricanteDAOImpl extends GenericDAOImpl<Fabricante> implements Fab
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(fabricante);
+            session.saveOrUpdate(fabricante);
             tx.commit();
         }
         catch (RuntimeException e) {

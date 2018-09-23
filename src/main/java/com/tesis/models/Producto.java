@@ -19,7 +19,7 @@ public class Producto implements Serializable {
     private String nombreProducto;
     private String rubro;
     private Boolean esAlimento;
-    private Float porcion;
+    private float porcion;
     private String tipoPorcion;
     private Envase envase;
     private Fabricante fabricante;
@@ -103,11 +103,11 @@ public class Producto implements Serializable {
         this.esAlimento = esAlimento;
     }
 
-    public Float getPorcion() {
+    public float getPorcion() {
         return porcion;
     }
 
-    public void setPorcion(Float porcion) {
+    public void setPorcion(float porcion) {
         this.porcion = porcion;
     }
 
