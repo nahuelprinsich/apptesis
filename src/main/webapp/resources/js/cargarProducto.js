@@ -21,8 +21,7 @@ $(document).ready(function() {
     if(obtenerParametro() != null){
         $.ajax({
             type: "GET",
-            //url: "http://localhost:8080/proyecto-tesis/getProductoById.json?id=" + obtenerParametro(),
-            url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getProductoById.json?id=" + obtenerParametro(),
+            url: "getProductoById.json?id=" + obtenerParametro(),
             dataType: "json",
             async: false,
             success: function (data) {
@@ -197,8 +196,7 @@ function cargarTablaIngredientes() {
     var resultIngredientes;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllIngredientes.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllIngredientes.json",
+        url: "getAllIngredientes.json",
         dataType: "json",
         async: false,
         success : function(data) {
@@ -238,8 +236,7 @@ function cargarTablaValores() {
     var tablaValoresE;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllValoresEnergeticos.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllValoresEnergeticos.json",
+        url: "getAllValoresEnergeticos.json",
         dataType: "json",
         async: false,
         success : function(data) {
@@ -290,8 +287,7 @@ function cargarTablaExtras() {
     var resultExtras;
     $.ajax({
         type: "GET",
-        //url: "http://localhost:8080/proyecto-tesis/getAllExtrasTabla.json",
-        url: "http://apptesis-apptesis.7e14.starter-us-west-2.openshiftapps.com/proyecto-tesis/getAllExtrasTabla.json",
+        url: "getAllExtrasTabla.json",
         dataType: "json",
         async: false,
         success : function(data) {
