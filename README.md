@@ -1,6 +1,6 @@
 # ConZoom Web App
 
-Aplicacion web destinada a la carga de productos que seran consultados por la aplicacion ConZoom
+Aplicacion web destinada a la carga de productos que seran consultados por la aplicacion ConZoom.
 
 ## Consideraciones
 
