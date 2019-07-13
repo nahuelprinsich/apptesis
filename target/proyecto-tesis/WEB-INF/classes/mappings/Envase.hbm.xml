@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tesis.models">
+    <class name="Envase" table="envase">
+        <id name="idEnvase" type="integer" column="idEnvase" unsaved-value="0">
+            <generator class="native" ></generator>
+        </id>
+        <property name="descripcion" column="descripcion" />
+        <property name="urlImagen" column="urlImagen" />
+        <set name="caracteristicasEnvase" table="envase_caracteristicaenvase" lazy="false">
+            <key column="Envase_idEnvase"/>
+            <many-to-many column="CaracteristicaEnvase_idCaracteristicaEnvase" class="CaracteristicaEnvase"/>
+        </set>
+    </class>
+</hibernate-mapping>

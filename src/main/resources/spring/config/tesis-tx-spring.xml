@@ -13,9 +13,9 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://sql135.main-hosting.eu.:8080/u745867915_tesis" />
-        <property name="username" value="u745867915_admin" />
-        <property name="password" value="admintesis" />
+        <property name="url" value="jdbc:mysql://127.0.0.1:8080/conzoom" />
+        <property name="username" value="conzoom" />
+        <property name="password" value="C0nz00m.2018" />
     </bean>
 
     <!-- Hibernate session factory -->

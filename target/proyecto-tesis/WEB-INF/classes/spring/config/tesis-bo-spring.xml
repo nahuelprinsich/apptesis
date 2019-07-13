@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!-- Stock business object -->
+
+    <bean id="comentario.bo" class="com.tesis.bo.impl.ComentarioBOImpl">
+        <property name="comentarioDAO" ref="comentario.hibernate.dao" />
+        <property name="genericDAO" ref="comentario.hibernate.dao" />
+    </bean>
+
+    <bean id="item.bo" class="com.tesis.bo.impl.ItemBOImpl">
+        <property name="itemDAO" ref="item.hibernate.dao" />
+        <property name="genericDAO" ref="item.hibernate.dao" />
+    </bean>
+
+    <bean id="producto.bo" class="com.tesis.bo.impl.ProductoBOImpl">
+        <property name="productoDAO" ref="producto.hibernate.dao" />
+        <property name="genericDAO" ref="producto.hibernate.dao" />
+    </bean>
+
+    <bean id="envase.bo" class="com.tesis.bo.impl.EnvaseBOImpl">
+        <property name="envaseDAO" ref="envase.hibernate.dao" />
+        <property name="genericDAO" ref="envase.hibernate.dao" />
+    </bean>
+
+    <bean id="extra.bo" class="com.tesis.bo.impl.ExtraBOImpl">
+        <property name="extraDAO" ref="extra.hibernate.dao" />
+        <property name="genericDAO" ref="extra.hibernate.dao" />
+    </bean>
+
+    <bean id="fabricante.bo" class="com.tesis.bo.impl.FabricanteBOImpl">
+        <property name="fabricanteDAO" ref="fabricante.hibernate.dao" />
+        <property name="genericDAO" ref="fabricante.hibernate.dao" />
+    </bean>
+
+    <bean id="ingrediente.bo" class="com.tesis.bo.impl.IngredienteBOImpl">
+        <property name="ingredienteDAO" ref="ingrediente.hibernate.dao" />
+        <property name="genericDAO" ref="ingrediente.hibernate.dao" />
+    </bean>
+
+    <bean id="valorEnergetico.bo" class="com.tesis.bo.impl.ValorEnergeticoBOImpl">
+        <property name="valorEnergeticoDAO" ref="valorEnergetico.hibernate.dao" />
+        <property name="genericDAO" ref="valorEnergetico.hibernate.dao" />
+    </bean>
+
+    <bean id="productoValorEnergetico.bo" class="com.tesis.bo.impl.ProductoValorEnergeticoBOImpl">
+        <property name="productoValorEnergeticoDAO" ref="productoValorEnergetico.hibernate.dao" />
+        <property name="genericDAO" ref="productoValorEnergetico.hibernate.dao" />
+    </bean>
+
+    <bean id="caracteristicaEnvase.bo" class="com.tesis.bo.impl.CaracteristicaEnvaseBOImpl">
+        <property name="caracteristicaEnvaseDAO" ref="caracteristicaEnvase.hibernate.dao" />
+    </bean>
+
+    <bean id="usuario.bo" class="com.tesis.bo.impl.UsuarioBOImpl">
+        <property name="usuarioDAO" ref="usuario.hibernate.dao" />
+    </bean>
+
+</beans>
